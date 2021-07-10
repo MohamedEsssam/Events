@@ -2,8 +2,9 @@ import Organization from "./Organization";
 import Participant from "./Participant";
 import Category from "./Category";
 
-type location = { lat: number; long: number };
+type location = { lat: number; lng: number };
 interface Event_ {
+  readonly _id: string;
   organization: Organization;
   participants?: Participant[];
   holdOn: Date;

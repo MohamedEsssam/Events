@@ -1,7 +1,7 @@
 interface User {
-  id: string;
+  readonly _id: string;
   email: string;
-  password: string;
+  password?: string;
   verified: boolean;
 }
 
