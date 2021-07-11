@@ -2,6 +2,7 @@ import express from "express";
 
 const app = express();
 
+require("./startup/swagger")(app);
 require("./startup/config")();
 require("./startup/connectDB");
 
