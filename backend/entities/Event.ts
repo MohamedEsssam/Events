@@ -4,8 +4,8 @@ import Category from "./Category";
 
 type location = { lat: number; lng: number };
 interface Event_ {
-  readonly _id: string;
-  organization: Organization;
+  readonly _id?: string;
+  owner: Organization;
   participants?: Participant[];
   holdOn: Date;
   endIn: Date;

@@ -1,5 +1,5 @@
 interface User {
-  readonly _id: string;
+  readonly _id?: string;
   email: string;
   password?: string;
   verified: boolean;

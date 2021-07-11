@@ -4,7 +4,7 @@ import Event_ from "./Event";
 interface Participant extends User {
   firstName: string;
   lastName: string;
-  birthday: Date;
+  birthDate: Date;
   events?: Event_[];
 }
 
