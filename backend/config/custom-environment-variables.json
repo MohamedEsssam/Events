@@ -1,6 +1,7 @@
 {
   "databaseConn": "DB_CONN",
   "authSecret": "CP_AUTH_SECRET",
+  "clientApi":"CLIENT_API",
   "mailerUser":"NODEMAILER_USER",
   "mailerPass":"NODEMAILER_PASS"
 }

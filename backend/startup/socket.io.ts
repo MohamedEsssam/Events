@@ -1,6 +1,8 @@
+import { Server } from "http";
+
 let io: any;
 export class SocketIo {
-  constructor(private server: any) {}
+  constructor(private server: Server) {}
 
   init(): any {
     io = require("socket.io")(this.server);

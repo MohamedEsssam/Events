@@ -1,6 +1,7 @@
 {
   "databaseConn": "",
   "authSecret": "",
+  "clientApi":"",
   "mailerUser":"",
   "mailerPass":""
 }
