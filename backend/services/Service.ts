@@ -1,7 +1,7 @@
-import User from "../types/User";
-import Participant from "../types/Participant";
-import Organization from "../types/Organization";
-import Event_ from "../types/Event";
+import User from "../entities/User";
+import Participant from "../entities/Participant";
+import Organization from "../entities/Organization";
+import Event_ from "../entities/Event";
 
 type Combinable = User | Participant | Organization | Event_;
 
