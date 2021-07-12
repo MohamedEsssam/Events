@@ -1,24 +1,27 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrganizationRepository = void 0;
-var OrganizationRepository = /** @class */ (function () {
+var Repository_1 = require("./repository/Repository");
+var OrganizationRepository = /** @class */ (function (_super) {
+    __extends(OrganizationRepository, _super);
     function OrganizationRepository() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    OrganizationRepository.prototype.create = function (item) {
-        throw new Error("Method not implemented.");
-    };
-    OrganizationRepository.prototype.update = function (id, item) {
-        throw new Error("Method not implemented.");
-    };
-    OrganizationRepository.prototype.delete = function (id) {
-        throw new Error("Method not implemented.");
-    };
-    OrganizationRepository.prototype.getAll = function (item) {
-        throw new Error("Method not implemented.");
-    };
-    OrganizationRepository.prototype.getOne = function (id) {
-        throw new Error("Method not implemented.");
-    };
     return OrganizationRepository;
-}());
+}(Repository_1.Repository));
 exports.OrganizationRepository = OrganizationRepository;

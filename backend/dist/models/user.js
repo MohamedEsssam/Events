@@ -1,15 +1,12 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var mongoose_1 = __importDefault(require("mongoose"));
+var mongoose_1 = require("mongoose");
 var lodash_1 = require("lodash");
 var options = {
     discriminatorKey: "kind",
     toObject: { virtuals: true },
 };
-var userSchema = new mongoose_1.default.Schema({
+var userSchema = new mongoose_1.Schema({
     email: {
         type: String,
         unique: true,
@@ -35,5 +32,5 @@ userSchema.methods.toJSON = function () {
     var obj = this.toObject();
     return lodash_1.pick(obj, ["_id", "email", "verified"]);
 };
-var User = mongoose_1.default.model("User", userSchema);
+var User = mongoose_1.model("User", userSchema);
 exports.default = User;

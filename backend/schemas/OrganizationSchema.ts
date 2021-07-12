@@ -1,7 +1,7 @@
 import Joi, { ValidationResult } from "@hapi/joi";
 import Organization from "../entities/Organization";
 
-export function validateUserSchema<T extends Organization>(
+export function validateOrganizationSchema<T extends Organization>(
   organization: T
 ): ValidationResult {
   const schema = Joi.object({

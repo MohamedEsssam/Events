@@ -1,7 +1,8 @@
-import mongoose from "mongoose";
+import { Schema, model, Model } from "mongoose";
 import { pick } from "lodash";
+import Event from "../entities/Event";
 
-const pointSchema: mongoose.Schema = new mongoose.Schema({
+const pointSchema: Schema<Event> = new Schema<Event>({
   type: {
     type: String,
     enum: ["Point"],
@@ -13,7 +14,7 @@ const pointSchema: mongoose.Schema = new mongoose.Schema({
   },
 });
 
-const eventSchema: mongoose.Schema = new mongoose.Schema({
+const eventSchema: Schema = new Schema({
   title: {
     type: String,
     required: true,
@@ -61,12 +62,12 @@ const eventSchema: mongoose.Schema = new mongoose.Schema({
     required: true,
   },
   owner: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
   participants: {
-    type: [mongoose.Schema.Types.ObjectId],
+    type: [Schema.Types.ObjectId],
     ref: "User",
   },
 });
@@ -87,6 +88,6 @@ eventSchema.methods.toJSON = function (): object {
   ]);
 };
 
-const Event = mongoose.model("Event", eventSchema);
+const Event: Model<Event> = model("Event", eventSchema);
 
 export default Event;

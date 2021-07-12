@@ -1,11 +1,12 @@
-import mongoose from "mongoose";
+import { Schema, model, Model } from "mongoose";
 import { pick } from "lodash";
+import User from "../entities/User";
 
 const options: object = {
   discriminatorKey: "kind",
   toObject: { virtuals: true },
 };
-const userSchema: mongoose.Schema = new mongoose.Schema(
+const userSchema: Schema<User> = new Schema<User>(
   {
     email: {
       type: String,
@@ -39,6 +40,6 @@ userSchema.methods.toJSON = function (): object {
   return pick(obj, ["_id", "email", "verified"]);
 };
 
-const User = mongoose.model("User", userSchema);
+const User: Model<User> = model<User>("User", userSchema);
 
 export default User;

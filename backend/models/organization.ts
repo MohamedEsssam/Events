@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 import { pick } from "lodash";
 import moment from "moment";
 import User from "./user";
@@ -9,7 +9,7 @@ const options = {
     virtuals: true,
   },
 };
-const organizationSchema: mongoose.Schema = new mongoose.Schema(
+const organizationSchema: Schema = new Schema(
   {
     name: {
       type: String,

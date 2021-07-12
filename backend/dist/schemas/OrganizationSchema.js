@@ -3,9 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateUserSchema = void 0;
+exports.validateOrganizationSchema = void 0;
 var joi_1 = __importDefault(require("@hapi/joi"));
-function validateUserSchema(organization) {
+function validateOrganizationSchema(organization) {
     var schema = joi_1.default.object({
         email: joi_1.default.string().email().required(),
         password: joi_1.default.string().min(3).required(),
@@ -17,4 +17,4 @@ function validateUserSchema(organization) {
     });
     return schema.validate(organization);
 }
-exports.validateUserSchema = validateUserSchema;
+exports.validateOrganizationSchema = validateOrganizationSchema;

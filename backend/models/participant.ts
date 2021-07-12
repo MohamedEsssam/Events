@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 import { pick } from "lodash";
 import moment from "moment";
 import User from "./user";
@@ -9,7 +9,7 @@ const options = {
     virtuals: true,
   },
 };
-const participantSchema: mongoose.Schema = new mongoose.Schema(
+const participantSchema: Schema = new Schema(
   {
     firstName: {
       type: String,
@@ -27,7 +27,7 @@ const participantSchema: mongoose.Schema = new mongoose.Schema(
       required: true,
     },
     events: {
-      type: [mongoose.Schema.Types.ObjectId],
+      type: [Schema.Types.ObjectId],
       ref: "Event",
     },
   },
