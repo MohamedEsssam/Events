@@ -17,8 +17,10 @@ require("./startup/swagger")(app);
 require("./startup/connectDB");
 socketIo.init();
 
-const repository = new UserRepository(UserModel);
-const user: User = { email: "ggg@m.com", password: "1111", verified: false };
-// const result: any = repository.create(user);
-const result: any = repository.getAll();
+const repository: UserRepository = new UserRepository(UserModel);
+const user: User = { email: "ff@m.com", password: "9999", verified: false };
+const result: any = repository.create(user);
+// const result: any = repository.getAll();
+// const result: any = repository.login("gg@m.com", "");
+
 console.log(result);

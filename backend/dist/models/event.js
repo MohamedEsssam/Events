@@ -1,11 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var mongoose_1 = __importDefault(require("mongoose"));
+var mongoose_1 = require("mongoose");
 var lodash_1 = require("lodash");
-var pointSchema = new mongoose_1.default.Schema({
+var pointSchema = new mongoose_1.Schema({
     type: {
         type: String,
         enum: ["Point"],
@@ -16,7 +13,7 @@ var pointSchema = new mongoose_1.default.Schema({
         required: true,
     },
 });
-var eventSchema = new mongoose_1.default.Schema({
+var eventSchema = new mongoose_1.Schema({
     title: {
         type: String,
         required: true,
@@ -58,12 +55,12 @@ var eventSchema = new mongoose_1.default.Schema({
         required: true,
     },
     owner: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
+        type: mongoose_1.Schema.Types.ObjectId,
         ref: "User",
         required: true,
     },
     participants: {
-        type: [mongoose_1.default.Schema.Types.ObjectId],
+        type: [mongoose_1.Schema.Types.ObjectId],
         ref: "User",
     },
 });
@@ -81,5 +78,5 @@ eventSchema.methods.toJSON = function () {
         "participants",
     ]);
 };
-var Event = mongoose_1.default.model("Event", eventSchema);
+var Event = mongoose_1.model("Event", eventSchema);
 exports.default = Event;

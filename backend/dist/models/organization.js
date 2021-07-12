@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var mongoose_1 = __importDefault(require("mongoose"));
+var mongoose_1 = require("mongoose");
 var lodash_1 = require("lodash");
 var moment_1 = __importDefault(require("moment"));
 var user_1 = __importDefault(require("./user"));
@@ -13,7 +13,7 @@ var options = {
         virtuals: true,
     },
 };
-var organizationSchema = new mongoose_1.default.Schema({
+var organizationSchema = new mongoose_1.Schema({
     name: {
         type: String,
         required: true,
