@@ -2,6 +2,7 @@ import { Schema } from "mongoose";
 import { pick } from "lodash";
 import moment from "moment";
 import User from "./user";
+import Organization from "../entities/Organization";
 
 const options = {
   toObject: {
@@ -9,7 +10,7 @@ const options = {
     virtuals: true,
   },
 };
-const organizationSchema: Schema = new Schema(
+const organizationSchema: Schema<Organization> = new Schema<Organization>(
   {
     name: {
       type: String,
@@ -41,6 +42,10 @@ const organizationSchema: Schema = new Schema(
       ],
       required: true,
     },
+    createdEvents: {
+      type: [Schema.Types.ObjectId],
+      ref: "Event",
+    },
   },
   options
 );
@@ -56,9 +61,10 @@ organizationSchema.methods.toJSON = function (): object {
     "description",
     "establishOn",
     "activityTypes",
+    "createdEvents",
   ]);
 };
 
-const Participant = User.discriminator("Organization", organizationSchema);
+const Participant = User.discriminator<any>("Organization", organizationSchema);
 
 export default Participant;

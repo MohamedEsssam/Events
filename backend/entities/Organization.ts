@@ -5,7 +5,8 @@ interface Organization extends User {
   name: string;
   description: string;
   establishOn: Date;
-  activityTypes: Category;
+  activityTypes: string[];
+  createdEvents?: string[];
 }
 
 export default Organization;

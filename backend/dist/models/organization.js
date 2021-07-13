@@ -44,6 +44,10 @@ var organizationSchema = new mongoose_1.Schema({
         ],
         required: true,
     },
+    createdEvents: {
+        type: [mongoose_1.Schema.Types.ObjectId],
+        ref: "Event",
+    },
 }, options);
 organizationSchema.methods.toJSON = function () {
     var obj = this.toObject();
@@ -55,6 +59,7 @@ organizationSchema.methods.toJSON = function () {
         "description",
         "establishOn",
         "activityTypes",
+        "createdEvents",
     ]);
 };
 var Participant = user_1.default.discriminator("Organization", organizationSchema);

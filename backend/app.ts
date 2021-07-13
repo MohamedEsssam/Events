@@ -5,8 +5,12 @@ import { SocketIo } from "./startup/socket.io";
 import User from "./entities/User";
 import ParticipantModel from "./models/participant";
 import UserModel from "./models/user";
+import OrganizationModel from "./models/organization";
 import { ParticipantRepository } from "./repositories/ParticipantRepository";
 import Participant from "./entities/Participant";
+import { OrganizationRepository } from "./repositories/OrgnizationRepository";
+import Organization from "./entities/Organization";
+import Category from "./entities/Category";
 
 const app: express.Application = express();
 const server: Server = app.listen(9000, () => {
@@ -20,23 +24,22 @@ require("./startup/swagger")(app);
 require("./startup/connectDB");
 socketIo.init();
 
-const repository: ParticipantRepository = new ParticipantRepository(
-  ParticipantModel
+const repository: OrganizationRepository = new OrganizationRepository(
+  OrganizationModel
 );
-const user: Participant = {
-  email: "bbb@m.com",
+
+const user: Organization = {
+  email: "kk@m.com",
   password: "9999",
   verified: false,
-  firstName: "Mohamed",
-  lastName: "Essam",
-  birthDate: new Date(),
+  name: "resala_",
+  description: "charity organization",
+  activityTypes: ["Festivals"],
+  establishOn: new Date(),
 };
 // const result: any = repository.register(user);
-// const result: any = repository.getAll();
+const result: any = repository.getAll();
 // const result: any = repository.login("gg@m.com", "");
-const result: any = repository.unParticipate(
-  "60ed4fa7f30885ea99a5d50a",
-  "60ed4fa7f30885ea99a5d50f"
-);
+// const result: any = repository.register(user);
 
 console.log(result);
