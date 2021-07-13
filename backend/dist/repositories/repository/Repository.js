@@ -98,6 +98,7 @@ var Repository = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.model.find(item ? item : {})];
                     case 1:
                         items = _a.sent();
+                        console.log(items);
                         return [2 /*return*/, items];
                 }
             });

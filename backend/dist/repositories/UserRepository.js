@@ -92,11 +92,20 @@ var UserRepository = /** @class */ (function (_super) {
                     case 2:
                         if (!(_a.sent()))
                             return [2 /*return*/, null];
-                        console.log(loginUser);
                         return [2 /*return*/, loginUser];
                 }
             });
         });
+    };
+    UserRepository.prototype.verify = function () {
+        return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
+            return [2 /*return*/];
+        }); });
+    };
+    UserRepository.prototype.resetPassword = function () {
+        return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
+            return [2 /*return*/];
+        }); });
     };
     UserRepository.prototype.isMatchedPassword = function (password, hashedPassword) {
         return __awaiter(this, void 0, void 0, function () {

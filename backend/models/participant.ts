@@ -2,6 +2,7 @@ import { Schema } from "mongoose";
 import { pick } from "lodash";
 import moment from "moment";
 import User from "./user";
+import Participant from "../entities/Participant";
 
 const options = {
   toObject: {
@@ -9,7 +10,7 @@ const options = {
     virtuals: true,
   },
 };
-const participantSchema: Schema = new Schema(
+const participantSchema: Schema<Participant> = new Schema<Participant>(
   {
     firstName: {
       type: String,
@@ -48,6 +49,6 @@ participantSchema.methods.toJSON = function (): object {
   ]);
 };
 
-const Participant = User.discriminator("Participant", participantSchema);
+const Participant = User.discriminator<any>("Participant", participantSchema);
 
 export default Participant;

@@ -5,7 +5,7 @@ interface Participant extends User {
   firstName: string;
   lastName: string;
   birthDate: Date;
-  events?: Event_[];
+  events?: string[];
 }
 
 export default Participant;

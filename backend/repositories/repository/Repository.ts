@@ -1,9 +1,9 @@
-import { EnforceDocument, Model } from "mongoose";
+import { Document, EnforceDocument, Model } from "mongoose";
 import { IRead } from "../interfaces/IRead";
 import { IWrite } from "../interfaces/IWrite";
 
 export abstract class Repository<T> implements IWrite<T>, IRead<T> {
-  constructor(protected model: Model<T>) {}
+  constructor(protected model: Model<T> | Model<T, {}, {}>) {}
   public async create(item: T): Promise<T | null> {
     const createdItem = new this.model(item);
 
@@ -26,6 +26,8 @@ export abstract class Repository<T> implements IWrite<T>, IRead<T> {
   }
   public async getAll(item?: T): Promise<T[]> {
     const items = await this.model.find(item ? item : {});
+
+    console.log(items);
 
     return items;
   }
