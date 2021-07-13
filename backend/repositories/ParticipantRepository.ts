@@ -1,6 +1,7 @@
 import { Repository } from "./repository/Repository";
 import Participant from "../entities/Participant";
 import { EnforceDocument } from "mongoose";
+import { encryptPassword } from "../services/EncryptPasswordService";
 
 export class ParticipantRepository extends Repository<Participant> {
   public async register(participant: Participant): Promise<Participant | null> {
@@ -8,6 +9,10 @@ export class ParticipantRepository extends Repository<Participant> {
       email: participant["email"],
     });
     if (createdParticipant) return null;
+
+    participant["password"] = (await encryptPassword(
+      participant["password"] as string
+    )) as string;
 
     createdParticipant = new this.model(participant);
 

@@ -53,6 +53,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ParticipantRepository = void 0;
 var Repository_1 = require("./repository/Repository");
+var EncryptPasswordService_1 = require("../services/EncryptPasswordService");
 var ParticipantRepository = /** @class */ (function (_super) {
     __extends(ParticipantRepository, _super);
     function ParticipantRepository() {
@@ -60,19 +61,24 @@ var ParticipantRepository = /** @class */ (function (_super) {
     }
     ParticipantRepository.prototype.register = function (participant) {
         return __awaiter(this, void 0, void 0, function () {
-            var createdParticipant;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var createdParticipant, _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0: return [4 /*yield*/, this.model.findOne({
                             email: participant["email"],
                         })];
                     case 1:
-                        createdParticipant = _a.sent();
+                        createdParticipant = _c.sent();
                         if (createdParticipant)
                             return [2 /*return*/, null];
+                        _a = participant;
+                        _b = "password";
+                        return [4 /*yield*/, EncryptPasswordService_1.encryptPassword(participant["password"])];
+                    case 2:
+                        _a[_b] = (_c.sent());
                         createdParticipant = new this.model(participant);
                         return [4 /*yield*/, createdParticipant.save()];
-                    case 2: return [2 /*return*/, _a.sent()];
+                    case 3: return [2 /*return*/, _c.sent()];
                 }
             });
         });

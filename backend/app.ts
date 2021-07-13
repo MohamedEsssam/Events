@@ -27,22 +27,21 @@ require("./startup/swagger")(app);
 require("./startup/connectDB");
 socketIo.init();
 
-const repository: EventRepository = new EventRepository(EventModel);
+const repository: UserRepository = new UserRepository(UserModel);
 
-const user: Event_ = {
-  title: "hhhh",
-  description: "hahahaha",
-  categories: ["Festivals"],
-  ticketPrice: 50,
-  endIn: new Date(),
-  holdOn: new Date(),
-  owner: "60ed8bfcd5c1371b5b2c035d",
-  location: { lat: 30, lng: 50 },
+const user: Participant = {
+  email: "hhhh@gg.com",
+  password: "1111",
+  firstName: "mm",
+  lastName: "tt",
+  birthDate: new Date(),
+  verified: false,
 };
-const result: any = repository.create(user);
+
+// const result: any = repository.create(user);
 // const result: any = repository.register(user);
 // const result: any = repository.getAll();
-// const result: any = repository.login("gg@m.com", "");
+const result: any = repository.login("hhhh@gg.com", "1115");
 // const result: any = repository.register(user);
 
 console.log(result);

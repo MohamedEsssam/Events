@@ -1,5 +1,6 @@
 import { Repository } from "./repository/Repository";
 import Organization from "../entities/Organization";
+import { encryptPassword } from "../services/EncryptPasswordService";
 
 export class OrganizationRepository extends Repository<Organization> {
   public async register(
@@ -9,6 +10,10 @@ export class OrganizationRepository extends Repository<Organization> {
       email: organization["email"],
     });
     if (createdOrganization) return null;
+
+    organization["password"] = (await encryptPassword(
+      organization["password"] as string
+    )) as string;
 
     createdOrganization = new this.model(organization);
 

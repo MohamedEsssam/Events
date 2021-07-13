@@ -53,6 +53,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrganizationRepository = void 0;
 var Repository_1 = require("./repository/Repository");
+var EncryptPasswordService_1 = require("../services/EncryptPasswordService");
 var OrganizationRepository = /** @class */ (function (_super) {
     __extends(OrganizationRepository, _super);
     function OrganizationRepository() {
@@ -60,19 +61,24 @@ var OrganizationRepository = /** @class */ (function (_super) {
     }
     OrganizationRepository.prototype.register = function (organization) {
         return __awaiter(this, void 0, void 0, function () {
-            var createdOrganization;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var createdOrganization, _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0: return [4 /*yield*/, this.model.findOne({
                             email: organization["email"],
                         })];
                     case 1:
-                        createdOrganization = _a.sent();
+                        createdOrganization = _c.sent();
                         if (createdOrganization)
                             return [2 /*return*/, null];
+                        _a = organization;
+                        _b = "password";
+                        return [4 /*yield*/, EncryptPasswordService_1.encryptPassword(organization["password"])];
+                    case 2:
+                        _a[_b] = (_c.sent());
                         createdOrganization = new this.model(organization);
                         return [4 /*yield*/, createdOrganization.save()];
-                    case 2: return [2 /*return*/, _a.sent()];
+                    case 3: return [2 /*return*/, _c.sent()];
                 }
             });
         });

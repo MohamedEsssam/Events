@@ -1,19 +1,4 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -70,54 +55,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserRepository = void 0;
-var Repository_1 = require("./repository/Repository");
+exports.encryptPassword = void 0;
 var bcrypt = __importStar(require("bcrypt"));
-var UserRepository = /** @class */ (function (_super) {
-    __extends(UserRepository, _super);
-    function UserRepository() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    UserRepository.prototype.login = function (email, password) {
-        return __awaiter(this, void 0, void 0, function () {
-            var loginUser;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.model.findOne({ email: email })];
-                    case 1:
-                        loginUser = _a.sent();
-                        if (!loginUser)
-                            return [2 /*return*/, null];
-                        return [4 /*yield*/, this.isMatchedPassword(password, loginUser["password"])];
-                    case 2:
-                        if (!(_a.sent()))
-                            return [2 /*return*/, null];
-                        console.log("login");
-                        return [2 /*return*/, loginUser];
-                }
-            });
+function encryptPassword(password) {
+    return __awaiter(this, void 0, void 0, function () {
+        var genSalt;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, bcrypt.genSalt(10)];
+                case 1:
+                    genSalt = _a.sent();
+                    return [4 /*yield*/, bcrypt.hash(password, genSalt)];
+                case 2: return [2 /*return*/, _a.sent()];
+            }
         });
-    };
-    UserRepository.prototype.verify = function () {
-        return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
-            return [2 /*return*/];
-        }); });
-    };
-    UserRepository.prototype.resetPassword = function () {
-        return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
-            return [2 /*return*/];
-        }); });
-    };
-    UserRepository.prototype.isMatchedPassword = function (password, hashedPassword) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, bcrypt.compare(password, hashedPassword)];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    return UserRepository;
-}(Repository_1.Repository));
-exports.UserRepository = UserRepository;
+    });
+}
+exports.encryptPassword = encryptPassword;
