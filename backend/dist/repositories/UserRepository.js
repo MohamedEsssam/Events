@@ -69,10 +69,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserRepository = void 0;
 var Repository_1 = require("./repository/Repository");
 var bcrypt = __importStar(require("bcrypt"));
+var UserSchema_1 = require("../schemas/UserSchema");
+var BadRequest_1 = __importDefault(require("../exceptions/BadRequest"));
 var UserRepository = /** @class */ (function (_super) {
     __extends(UserRepository, _super);
     function UserRepository() {
@@ -80,10 +85,18 @@ var UserRepository = /** @class */ (function (_super) {
     }
     UserRepository.prototype.login = function (email, password) {
         return __awaiter(this, void 0, void 0, function () {
-            var loginUser;
+            var error, loginUser;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.model.findOne({ email: email })];
+                    case 0:
+                        error = UserSchema_1.validateUserSchema({
+                            email: email,
+                            password: password,
+                            verified: false,
+                        }).error;
+                        if (error)
+                            throw new Error(BadRequest_1.default.description);
+                        return [4 /*yield*/, this.model.findOne({ email: email })];
                     case 1:
                         loginUser = _a.sent();
                         if (!loginUser)

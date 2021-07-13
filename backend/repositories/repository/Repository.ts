@@ -1,4 +1,4 @@
-import { Document, EnforceDocument, Model } from "mongoose";
+import { EnforceDocument, Model } from "mongoose";
 import { IRead } from "../interfaces/IRead";
 import { IWrite } from "../interfaces/IWrite";
 

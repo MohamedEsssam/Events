@@ -50,10 +50,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrganizationRepository = void 0;
 var Repository_1 = require("./repository/Repository");
 var EncryptPasswordService_1 = require("../services/EncryptPasswordService");
+var OrganizationSchema_1 = require("../schemas/OrganizationSchema");
+var BadRequest_1 = __importDefault(require("../exceptions/BadRequest"));
 var OrganizationRepository = /** @class */ (function (_super) {
     __extends(OrganizationRepository, _super);
     function OrganizationRepository() {
@@ -61,12 +66,16 @@ var OrganizationRepository = /** @class */ (function (_super) {
     }
     OrganizationRepository.prototype.register = function (organization) {
         return __awaiter(this, void 0, void 0, function () {
-            var createdOrganization, _a, _b;
+            var error, createdOrganization, _a, _b;
             return __generator(this, function (_c) {
                 switch (_c.label) {
-                    case 0: return [4 /*yield*/, this.model.findOne({
-                            email: organization["email"],
-                        })];
+                    case 0:
+                        error = OrganizationSchema_1.validateOrganizationSchema(organization).error;
+                        if (error)
+                            throw new Error(BadRequest_1.default.description);
+                        return [4 /*yield*/, this.model.findOne({
+                                email: organization["email"],
+                            })];
                     case 1:
                         createdOrganization = _c.sent();
                         if (createdOrganization)

@@ -4,9 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
-var UserRepository_1 = require("./repositories/UserRepository");
 var socket_io_1 = require("./startup/socket.io");
-var user_1 = __importDefault(require("./models/user"));
+var participant_1 = __importDefault(require("./models/participant"));
+var ParticipantRepository_1 = require("./repositories/ParticipantRepository");
 var app = express_1.default();
 var server = app.listen(9000, function () {
     console.log("app listening on port 9000!");
@@ -17,18 +17,18 @@ require("./startup/cors")(app);
 require("./startup/swagger")(app);
 require("./startup/connectDB");
 socketIo.init();
-var repository = new UserRepository_1.UserRepository(user_1.default);
+var repository = new ParticipantRepository_1.ParticipantRepository(participant_1.default);
 var user = {
-    email: "hhhh@gg.com",
-    password: "1111",
+    email: "nnn@gg.com",
+    password: "11",
     firstName: "mm",
     lastName: "tt",
     birthDate: new Date(),
     verified: false,
 };
 // const result: any = repository.create(user);
-// const result: any = repository.register(user);
+var result = repository.register(user);
 // const result: any = repository.getAll();
-var result = repository.login("hhhh@gg.com", "1115");
+// const result: any = repository.login("hhhh@gg.com", "1115");
 // const result: any = repository.register(user);
 console.log(result);

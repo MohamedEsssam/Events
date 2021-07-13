@@ -2,9 +2,14 @@ import { Repository } from "./repository/Repository";
 import Participant from "../entities/Participant";
 import { EnforceDocument } from "mongoose";
 import { encryptPassword } from "../services/EncryptPasswordService";
+import { validateParticipantSchema } from "../schemas/ParticipantSchema";
+import BadRequest from "../exceptions/BadRequest";
 
 export class ParticipantRepository extends Repository<Participant> {
   public async register(participant: Participant): Promise<Participant | null> {
+    const { error } = validateParticipantSchema(participant);
+    if (error) throw new Error(BadRequest.description);
+
     let createdParticipant = await this.model.findOne({
       email: participant["email"],
     });

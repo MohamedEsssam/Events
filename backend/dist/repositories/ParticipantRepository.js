@@ -50,10 +50,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ParticipantRepository = void 0;
 var Repository_1 = require("./repository/Repository");
 var EncryptPasswordService_1 = require("../services/EncryptPasswordService");
+var ParticipantSchema_1 = require("../schemas/ParticipantSchema");
+var BadRequest_1 = __importDefault(require("../exceptions/BadRequest"));
 var ParticipantRepository = /** @class */ (function (_super) {
     __extends(ParticipantRepository, _super);
     function ParticipantRepository() {
@@ -61,12 +66,16 @@ var ParticipantRepository = /** @class */ (function (_super) {
     }
     ParticipantRepository.prototype.register = function (participant) {
         return __awaiter(this, void 0, void 0, function () {
-            var createdParticipant, _a, _b;
+            var error, createdParticipant, _a, _b;
             return __generator(this, function (_c) {
                 switch (_c.label) {
-                    case 0: return [4 /*yield*/, this.model.findOne({
-                            email: participant["email"],
-                        })];
+                    case 0:
+                        error = ParticipantSchema_1.validateParticipantSchema(participant).error;
+                        if (error)
+                            throw new Error(BadRequest_1.default.description);
+                        return [4 /*yield*/, this.model.findOne({
+                                email: participant["email"],
+                            })];
                     case 1:
                         createdParticipant = _c.sent();
                         if (createdParticipant)
