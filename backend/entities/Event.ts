@@ -5,14 +5,15 @@ import Category from "./Category";
 type location = { lat: number; lng: number };
 interface Event_ {
   readonly _id?: string;
-  owner: Organization;
-  participants?: Participant[];
+  title: string;
+  description: string;
   holdOn: Date;
   endIn: Date;
   location: location;
-  description: string;
   ticketPrice: number;
-  category: Category;
+  categories: string[];
+  owner: string;
+  participants?: string[];
 }
 
 export default Event_;

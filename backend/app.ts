@@ -5,12 +5,15 @@ import { SocketIo } from "./startup/socket.io";
 import User from "./entities/User";
 import ParticipantModel from "./models/participant";
 import UserModel from "./models/user";
+import EventModel from "./models/event";
 import OrganizationModel from "./models/organization";
 import { ParticipantRepository } from "./repositories/ParticipantRepository";
 import Participant from "./entities/Participant";
 import { OrganizationRepository } from "./repositories/OrgnizationRepository";
 import Organization from "./entities/Organization";
 import Category from "./entities/Category";
+import { EventRepository } from "./repositories/EventRepository";
+import Event_ from "./entities/Event";
 
 const app: express.Application = express();
 const server: Server = app.listen(9000, () => {
@@ -24,21 +27,21 @@ require("./startup/swagger")(app);
 require("./startup/connectDB");
 socketIo.init();
 
-const repository: OrganizationRepository = new OrganizationRepository(
-  OrganizationModel
-);
+const repository: EventRepository = new EventRepository(EventModel);
 
-const user: Organization = {
-  email: "kk@m.com",
-  password: "9999",
-  verified: false,
-  name: "resala_",
-  description: "charity organization",
-  activityTypes: ["Festivals"],
-  establishOn: new Date(),
+const user: Event_ = {
+  title: "hhhh",
+  description: "hahahaha",
+  categories: ["Festivals"],
+  ticketPrice: 50,
+  endIn: new Date(),
+  holdOn: new Date(),
+  owner: "60ed8bfcd5c1371b5b2c035d",
+  location: { lat: 30, lng: 50 },
 };
+const result: any = repository.create(user);
 // const result: any = repository.register(user);
-const result: any = repository.getAll();
+// const result: any = repository.getAll();
 // const result: any = repository.login("gg@m.com", "");
 // const result: any = repository.register(user);
 
