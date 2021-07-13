@@ -12,6 +12,16 @@ export function validateEventSchema<T extends Event>(
     holdOn: Joi.date().required(),
     endIn: Joi.date().required(),
     location: Joi.object({ lat: Joi.number(), lng: Joi.number() }).required(),
+    categories: Joi.string().valid(
+      "Festivals",
+      "Parties",
+      "Conferences",
+      "Awards",
+      "Competitions",
+      "Sponsorships",
+      "Workshops",
+      "SpeakerSession"
+    ),
     owner: Joi.string().required(),
     participants: Joi.array().items(Joi.string()),
   });
