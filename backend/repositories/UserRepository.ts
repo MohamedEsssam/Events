@@ -20,8 +20,6 @@ export class UserRepository extends Repository<User> {
     )
       return null;
 
-    console.log("login");
-
     return loginUser;
   }
 

@@ -105,7 +105,6 @@ var UserRepository = /** @class */ (function (_super) {
                     case 2:
                         if (!(_a.sent()))
                             return [2 /*return*/, null];
-                        console.log("login");
                         return [2 /*return*/, loginUser];
                 }
             });
