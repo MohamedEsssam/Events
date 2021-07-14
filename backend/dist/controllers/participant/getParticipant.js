@@ -43,6 +43,7 @@ exports.getParticipant = void 0;
 var ParticipantRepository_1 = require("../../repositories/ParticipantRepository");
 var participant_1 = __importDefault(require("../../models/participant"));
 var NotFound_1 = __importDefault(require("../../exceptions/NotFound"));
+var InternalServer_1 = __importDefault(require("../../exceptions/InternalServer"));
 var repository = new ParticipantRepository_1.ParticipantRepository(participant_1.default);
 var getParticipant = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var id, participate, error_1;
@@ -61,7 +62,7 @@ var getParticipant = function (req, res) { return __awaiter(void 0, void 0, void
                 return [2 /*return*/, res.status(200).send(participate)];
             case 3:
                 error_1 = _a.sent();
-                return [3 /*break*/, 4];
+                return [2 /*return*/, res.status(InternalServer_1.default.httpCode).send(InternalServer_1.default)];
             case 4: return [2 /*return*/];
         }
     });

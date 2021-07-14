@@ -44,6 +44,7 @@ var ParticipantRepository_1 = require("../../repositories/ParticipantRepository"
 var participant_1 = __importDefault(require("../../models/participant"));
 var UserAlreadyExist_1 = __importDefault(require("../../exceptions/UserAlreadyExist"));
 var BadRequest_1 = __importDefault(require("../../exceptions/BadRequest"));
+var InternalServer_1 = __importDefault(require("../../exceptions/InternalServer"));
 var repository = new ParticipantRepository_1.ParticipantRepository(participant_1.default);
 var register = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var request, participate, error_1;
@@ -64,6 +65,8 @@ var register = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
                 error_1 = _a.sent();
                 if (error_1.message === "You entered invalid data.")
                     return [2 /*return*/, res.status(BadRequest_1.default.httpCode).send(BadRequest_1.default)];
+                else
+                    return [2 /*return*/, res.status(InternalServer_1.default.httpCode).send(InternalServer_1.default)];
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
         }

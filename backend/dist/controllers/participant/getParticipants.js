@@ -42,6 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getParticipants = void 0;
 var ParticipantRepository_1 = require("../../repositories/ParticipantRepository");
 var participant_1 = __importDefault(require("../../models/participant"));
+var InternalServer_1 = __importDefault(require("../../exceptions/InternalServer"));
 var repository = new ParticipantRepository_1.ParticipantRepository(participant_1.default);
 var getParticipants = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var participate, error_1;
@@ -55,7 +56,7 @@ var getParticipants = function (req, res) { return __awaiter(void 0, void 0, voi
                 return [2 /*return*/, res.status(200).send(participate)];
             case 2:
                 error_1 = _a.sent();
-                return [3 /*break*/, 3];
+                return [2 /*return*/, res.status(InternalServer_1.default.httpCode).send(InternalServer_1.default)];
             case 3: return [2 /*return*/];
         }
     });

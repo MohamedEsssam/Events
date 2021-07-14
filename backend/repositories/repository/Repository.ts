@@ -15,7 +15,7 @@ export abstract class Repository<T> implements IWrite<T>, IRead<T> {
     if (!existItem) return null;
     await existItem.updateOne(newItem);
 
-    return existItem;
+    return await this.getOne(id);
   }
   public async delete(id: string): Promise<T | null> {
     const existItem = await this.model.findById({ _id: id });

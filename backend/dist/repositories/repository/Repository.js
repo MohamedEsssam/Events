@@ -67,7 +67,8 @@ var Repository = /** @class */ (function () {
                         return [4 /*yield*/, existItem.updateOne(newItem)];
                     case 2:
                         _a.sent();
-                        return [2 /*return*/, existItem];
+                        return [4 /*yield*/, this.getOne(id)];
+                    case 3: return [2 /*return*/, _a.sent()];
                 }
             });
         });
