@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha --watchAll",
     "coverage": "nyc npm run test",
-    "start": "tsc && nodemon dist/app.js"
+    "start": "tsc -w && nodemon dist/app.js"
   },
   "author": "",
   "license": "ISC",
