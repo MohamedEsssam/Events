@@ -10,15 +10,17 @@ export function validateOrganizationSchema<T extends Organization>(
     name: Joi.string().required(),
     description: Joi.string().required(),
     establishOn: Joi.date().raw().required(),
-    activityTypes: Joi.string().valid(
-      "Festivals",
-      "Parties",
-      "Conferences",
-      "Awards",
-      "Competitions",
-      "Sponsorships",
-      "Workshops",
-      "SpeakerSession"
+    activityTypes: Joi.array().items(
+      Joi.string().valid(
+        "Festivals",
+        "Parties",
+        "Conferences",
+        "Awards",
+        "Competitions",
+        "Sponsorships",
+        "Workshops",
+        "SpeakerSession"
+      )
     ),
     verified: Joi.boolean().required(),
   });

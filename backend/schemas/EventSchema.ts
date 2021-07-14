@@ -5,22 +5,23 @@ export function validateEventSchema<T extends Event>(
   event: T
 ): ValidationResult {
   const schema = Joi.object({
-    title: Joi.string().email().required(),
+    title: Joi.string().required(),
     description: Joi.string().required(),
     ticketPrice: Joi.number().required(),
-    lastName: Joi.string().required(),
     holdOn: Joi.date().required(),
     endIn: Joi.date().required(),
     location: Joi.object({ lat: Joi.number(), lng: Joi.number() }).required(),
-    categories: Joi.string().valid(
-      "Festivals",
-      "Parties",
-      "Conferences",
-      "Awards",
-      "Competitions",
-      "Sponsorships",
-      "Workshops",
-      "SpeakerSession"
+    categories: Joi.array().items(
+      Joi.string().valid(
+        "Festivals",
+        "Parties",
+        "Conferences",
+        "Awards",
+        "Competitions",
+        "Sponsorships",
+        "Workshops",
+        "SpeakerSession"
+      )
     ),
     owner: Joi.string().required(),
     participants: Joi.array().items(Joi.string()),
