@@ -12,7 +12,7 @@ function validateOrganizationSchema(organization) {
         name: joi_1.default.string().required(),
         description: joi_1.default.string().required(),
         establishOn: joi_1.default.date().raw().required(),
-        activityTypes: joi_1.default.string().valid("Festivals", "Parties", "Conferences", "Awards", "Competitions", "Sponsorships", "Workshops", "SpeakerSession"),
+        activityTypes: joi_1.default.array().items(joi_1.default.string().valid("Festivals", "Parties", "Conferences", "Awards", "Competitions", "Sponsorships", "Workshops", "SpeakerSession")),
         verified: joi_1.default.boolean().required(),
     });
     return schema.validate(organization);

@@ -63,6 +63,7 @@ var EventRepository = /** @class */ (function (_super) {
     function EventRepository() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    /**Override method create */
     EventRepository.prototype.create = function (event) {
         return __awaiter(this, void 0, void 0, function () {
             var error, createdEvent;
@@ -70,7 +71,6 @@ var EventRepository = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         error = EventSchema_1.validateEventSchema(event).error;
-                        console.log(error);
                         if (error)
                             throw new Error(BadRequest_1.default.description);
                         createdEvent = new this.model(event);
