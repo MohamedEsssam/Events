@@ -1,4 +1,4 @@
-import { EnforceDocument, Model } from "mongoose";
+import { EnforceDocument, FilterQuery, Model } from "mongoose";
 import { IRead } from "../interfaces/IRead";
 import { IWrite } from "../interfaces/IWrite";
 
@@ -24,10 +24,8 @@ export abstract class Repository<T> implements IWrite<T>, IRead<T> {
 
     return existItem;
   }
-  public async getAll(item?: T): Promise<T[]> {
+  public async getAll(item?: FilterQuery<T>): Promise<T[]> {
     const items = await this.model.find(item ? item : {});
-
-    console.log(items);
 
     return items;
   }
