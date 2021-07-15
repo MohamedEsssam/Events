@@ -110,10 +110,21 @@ var UserRepository = /** @class */ (function (_super) {
             });
         });
     };
-    UserRepository.prototype.verify = function () {
-        return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
-            return [2 /*return*/];
-        }); });
+    UserRepository.prototype.verify = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var user;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.model.findById({ _id: id })];
+                    case 1:
+                        user = _a.sent();
+                        if (!user)
+                            return [2 /*return*/, false];
+                        user.updateOne({ verified: true });
+                        return [2 /*return*/, true];
+                }
+            });
+        });
     };
     UserRepository.prototype.resetPassword = function () {
         return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {

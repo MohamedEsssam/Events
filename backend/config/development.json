@@ -3,5 +3,6 @@
   "authSecret": "",
   "clientApi":"",
   "mailerUser":"",
-  "mailerPass":""
+  "mailerPass":"",
+  "mailerSender":""
 }

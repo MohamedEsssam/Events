@@ -23,7 +23,15 @@ export class UserRepository extends Repository<User> {
     return loginUser;
   }
 
-  public async verify() {}
+  public async verify(id: string): Promise<boolean> {
+    const user = await this.model.findById({ _id: id });
+    if (!user) return false;
+
+    user.updateOne({ verified: true });
+
+    return true;
+  }
+
   public async resetPassword() {}
 
   private async isMatchedPassword(

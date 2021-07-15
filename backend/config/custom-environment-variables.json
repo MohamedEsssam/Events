@@ -3,5 +3,6 @@
   "authSecret": "CP_AUTH_SECRET",
   "clientApi":"CLIENT_API",
   "mailerUser":"NODEMAILER_USER",
-  "mailerPass":"NODEMAILER_PASS"
+  "mailerPass":"NODEMAILER_PASS",
+  "mailerSender":"NODEMAILER_SENDER"
 }
