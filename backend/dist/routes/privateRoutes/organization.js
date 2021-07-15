@@ -1,1 +1,13 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var updateOrganization_1 = require("../../controllers/organization/updateOrganization");
+var deleteOrganization_1 = require("../../controllers/organization/deleteOrganization");
+var getOrgainzation_1 = require("../../controllers/organization/getOrgainzation");
+var getOrganizations_1 = require("../../controllers/organization/getOrganizations");
+var router = express_1.Router();
+router.put("/:id", updateOrganization_1.updateOrganization);
+router.delete("/:id", deleteOrganization_1.deleteOrganization);
+router.get("/:id", getOrgainzation_1.getOrganization);
+router.get("/", getOrganizations_1.getOrganizations);
+exports.default = router;

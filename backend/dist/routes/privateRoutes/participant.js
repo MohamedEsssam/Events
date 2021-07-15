@@ -1,9 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
+var updateParticipant_1 = require("../../controllers/participant/updateParticipant");
+var deleteParticipant_1 = require("../../controllers/participant/deleteParticipant");
+var getParticipant_1 = require("../../controllers/participant/getParticipant");
+var getParticipants_1 = require("../../controllers/participant/getParticipants");
 var participate_1 = require("../../controllers/participant/participate");
 var unParticipate_1 = require("../../controllers/participant/unParticipate");
 var router = express_1.Router();
+router.put("/:id", updateParticipant_1.updateParticipant);
+router.delete("/:id", deleteParticipant_1.deleteParticipant);
+router.get("/:id", getParticipant_1.getParticipant);
+router.get("/", getParticipants_1.getParticipants);
 router.put("/participate", participate_1.participate);
 router.put("/un_participate", unParticipate_1.unParticipate);
 exports.default = router;
