@@ -46,7 +46,7 @@ var NotFound_1 = __importDefault(require("../../exceptions/NotFound"));
 var InternalServer_1 = __importDefault(require("../../exceptions/InternalServer"));
 var repository = new OrganizationRepository_1.OrganizationRepository(organization_1.default);
 var deleteOrganization = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, Organization, error_1;
+    var id, organization, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -56,10 +56,10 @@ var deleteOrganization = function (req, res) { return __awaiter(void 0, void 0, 
                 _a.trys.push([1, 3, , 4]);
                 return [4 /*yield*/, repository.delete(id)];
             case 2:
-                Organization = _a.sent();
-                if (!Organization)
+                organization = _a.sent();
+                if (!organization)
                     return [2 /*return*/, res.status(NotFound_1.default.httpCode).send(NotFound_1.default)];
-                return [2 /*return*/, res.status(200).send(Organization)];
+                return [2 /*return*/, res.status(200).send(organization)];
             case 3:
                 error_1 = _a.sent();
                 return [2 /*return*/, res.status(InternalServer_1.default.httpCode).send(InternalServer_1.default)];
