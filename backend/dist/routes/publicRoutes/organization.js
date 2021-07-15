@@ -2,9 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var createOrganization_1 = require("../../controllers/organization/createOrganization");
+var updateOrganization_1 = require("../../controllers/organization/updateOrganization");
 var router = express_1.Router();
 router.post("/register", createOrganization_1.register);
-// router.put("/:id", updateOrganization);
+router.put("/:id", updateOrganization_1.updateOrganization);
 // router.delete("/:id", deleteOrganization);
 // router.get("/:id", getOrganization);
 // router.get("/", getOrganizations);
