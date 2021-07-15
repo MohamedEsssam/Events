@@ -9,7 +9,7 @@ import EventModel from "./models/event";
 import OrganizationModel from "./models/organization";
 import { ParticipantRepository } from "./repositories/ParticipantRepository";
 import Participant from "./entities/Participant";
-import { OrganizationRepository } from "./repositories/OrgnizationRepository";
+import { OrganizationRepository } from "./repositories/OrganizationRepository";
 import Organization from "./entities/Organization";
 import Category from "./entities/Category";
 import { EventRepository } from "./repositories/EventRepository";
