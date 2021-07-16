@@ -92,6 +92,46 @@ var OrganizationRepository = /** @class */ (function (_super) {
             });
         });
     };
+    OrganizationRepository.prototype.addEvent = function (id, eventId) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function () {
+            var existOrganization;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, this.model.findById({ _id: id })];
+                    case 1:
+                        existOrganization = _b.sent();
+                        if (!existOrganization)
+                            return [2 /*return*/, false];
+                        (_a = existOrganization === null || existOrganization === void 0 ? void 0 : existOrganization.createdEvents) === null || _a === void 0 ? void 0 : _a.push(eventId);
+                        return [4 /*yield*/, existOrganization.save()];
+                    case 2:
+                        _b.sent();
+                        return [2 /*return*/, true];
+                }
+            });
+        });
+    };
+    OrganizationRepository.prototype.removeEvent = function (id, eventId) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var existOrganization;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0: return [4 /*yield*/, this.model.findById({ _id: id })];
+                    case 1:
+                        existOrganization = _c.sent();
+                        if (!existOrganization)
+                            return [2 /*return*/, false];
+                        (_a = existOrganization.createdEvents) === null || _a === void 0 ? void 0 : _a.splice((_b = existOrganization.createdEvents) === null || _b === void 0 ? void 0 : _b.indexOf(eventId), 1);
+                        return [4 /*yield*/, existOrganization.save()];
+                    case 2:
+                        _c.sent();
+                        return [2 /*return*/, true];
+                }
+            });
+        });
+    };
     return OrganizationRepository;
 }(Repository_1.Repository));
 exports.OrganizationRepository = OrganizationRepository;

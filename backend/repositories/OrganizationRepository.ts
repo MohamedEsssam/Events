@@ -24,4 +24,25 @@ export class OrganizationRepository extends Repository<Organization> {
 
     return await createdOrganization.save();
   }
+  public async addEvent(id: string, eventId: string): Promise<boolean> {
+    const existOrganization = await this.model.findById({ _id: id });
+    if (!existOrganization) return false;
+
+    existOrganization?.createdEvents?.push(eventId);
+    await existOrganization.save();
+
+    return true;
+  }
+  public async removeEvent(id: string, eventId: string): Promise<boolean> {
+    const existOrganization = await this.model.findById({ _id: id });
+    if (!existOrganization) return false;
+
+    existOrganization.createdEvents?.splice(
+      existOrganization.createdEvents?.indexOf(eventId),
+      1
+    );
+    await existOrganization.save();
+
+    return true;
+  }
 }

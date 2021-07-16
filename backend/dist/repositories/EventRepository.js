@@ -58,10 +58,14 @@ exports.EventRepository = void 0;
 var Repository_1 = require("./repository/Repository");
 var EventSchema_1 = require("../schemas/EventSchema");
 var BadRequest_1 = __importDefault(require("../exceptions/BadRequest"));
+var OrganizationRepository_1 = require("./OrganizationRepository");
+var organization_1 = __importDefault(require("../models/organization"));
 var EventRepository = /** @class */ (function (_super) {
     __extends(EventRepository, _super);
     function EventRepository() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.organizationRepository = new OrganizationRepository_1.OrganizationRepository(organization_1.default);
+        return _this;
     }
     /**Override method create */
     EventRepository.prototype.create = function (event) {
@@ -74,8 +78,11 @@ var EventRepository = /** @class */ (function (_super) {
                         if (error)
                             throw new Error(BadRequest_1.default.description);
                         createdEvent = new this.model(event);
+                        return [4 /*yield*/, this.organizationRepository.addEvent(createdEvent["owner"], createdEvent["_id"])];
+                    case 1:
+                        _a.sent();
                         return [4 /*yield*/, createdEvent.save()];
-                    case 1: return [2 /*return*/, (_a.sent())];
+                    case 2: return [2 /*return*/, (_a.sent())];
                 }
             });
         });
