@@ -4,6 +4,9 @@ import { EnforceDocument } from "mongoose";
 import { encryptPassword } from "../services/EncryptPasswordService";
 import { validateParticipantSchema } from "../schemas/ParticipantSchema";
 import BadRequest from "../exceptions/BadRequest";
+import { EmailServices } from "../services/EmailService";
+
+const emailService = new EmailServices();
 
 export class ParticipantRepository extends Repository<Participant> {
   public async register(participant: Participant): Promise<Participant | null> {
@@ -20,6 +23,12 @@ export class ParticipantRepository extends Repository<Participant> {
     )) as string;
 
     createdParticipant = new this.model(participant);
+
+    await emailService.sendVerificationEmail(
+      createdParticipant["_id"],
+      participant["email"],
+      participant["firstName"] + " " + participant["lastName"]
+    );
 
     return await createdParticipant.save();
   }

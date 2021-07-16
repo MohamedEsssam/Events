@@ -120,7 +120,9 @@ var UserRepository = /** @class */ (function (_super) {
                         user = _a.sent();
                         if (!user)
                             return [2 /*return*/, false];
-                        user.updateOne({ verified: true });
+                        return [4 /*yield*/, user.updateOne({ verified: true })];
+                    case 2:
+                        _a.sent();
                         return [2 /*return*/, true];
                 }
             });

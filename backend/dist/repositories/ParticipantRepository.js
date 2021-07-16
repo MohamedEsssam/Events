@@ -59,6 +59,8 @@ var Repository_1 = require("./repository/Repository");
 var EncryptPasswordService_1 = require("../services/EncryptPasswordService");
 var ParticipantSchema_1 = require("../schemas/ParticipantSchema");
 var BadRequest_1 = __importDefault(require("../exceptions/BadRequest"));
+var EmailService_1 = require("../services/EmailService");
+var emailService = new EmailService_1.EmailServices();
 var ParticipantRepository = /** @class */ (function (_super) {
     __extends(ParticipantRepository, _super);
     function ParticipantRepository() {
@@ -86,8 +88,11 @@ var ParticipantRepository = /** @class */ (function (_super) {
                     case 2:
                         _a[_b] = (_c.sent());
                         createdParticipant = new this.model(participant);
+                        return [4 /*yield*/, emailService.sendVerificationEmail(createdParticipant["_id"], participant["email"], participant["firstName"] + " " + participant["lastName"])];
+                    case 3:
+                        _c.sent();
                         return [4 /*yield*/, createdParticipant.save()];
-                    case 3: return [2 /*return*/, _c.sent()];
+                    case 4: return [2 /*return*/, _c.sent()];
                 }
             });
         });

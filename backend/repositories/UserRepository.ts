@@ -27,7 +27,7 @@ export class UserRepository extends Repository<User> {
     const user = await this.model.findById({ _id: id });
     if (!user) return false;
 
-    user.updateOne({ verified: true });
+    await user.updateOne({ verified: true });
 
     return true;
   }
