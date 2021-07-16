@@ -3,12 +3,13 @@ import { updateOrganization } from "../../controllers/organization/updateOrganiz
 import { deleteOrganization } from "../../controllers/organization/deleteOrganization";
 import { getOrganization } from "../../controllers/organization/getOrgainzation";
 import { getOrganizations } from "../../controllers/organization/getOrganizations";
+import { authJwt } from "../../middlewares/authJwt";
 
 const router: Router = Router();
 
-router.put("/:id", updateOrganization);
-router.delete("/:id", deleteOrganization);
-router.get("/:id", getOrganization);
-router.get("/", getOrganizations);
+router.put("/:id", authJwt, updateOrganization);
+router.delete("/:id", authJwt, deleteOrganization);
+router.get("/:id", authJwt, getOrganization);
+router.get("/", authJwt, getOrganizations);
 
 export default router;
