@@ -1,11 +1,16 @@
 import { Repository } from "./repository/Repository";
-import User from "../entities/User";
 import * as bcrypt from "bcrypt";
+import User from "../entities/User";
 import { validateUserSchema } from "../schemas/UserSchema";
 import BadRequest from "../exceptions/BadRequest";
+import { AuthServices } from "../services/AuthService";
 
+const authService = new AuthServices();
 export class UserRepository extends Repository<User> {
-  public async login(email: string, password: string): Promise<User | null> {
+  public async login(
+    email: string,
+    password: string
+  ): Promise<[User, string] | null> {
     const { error } = validateUserSchema({
       email: email,
       password: password,
@@ -20,7 +25,9 @@ export class UserRepository extends Repository<User> {
     )
       return null;
 
-    return loginUser;
+    const token = authService.generateToken(loginUser);
+
+    return [loginUser, token];
   }
 
   public async verify(id: string): Promise<boolean> {

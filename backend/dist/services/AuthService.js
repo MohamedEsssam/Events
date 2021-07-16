@@ -11,6 +11,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthServices = void 0;
 var jwt = require("jsonwebtoken");
 var pick = require("lodash/pick");
 var config = require("config");
@@ -24,4 +25,4 @@ var AuthServices = /** @class */ (function () {
     };
     return AuthServices;
 }());
-module.exports = AuthServices;
+exports.AuthServices = AuthServices;

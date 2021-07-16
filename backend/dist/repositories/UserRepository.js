@@ -78,6 +78,8 @@ var Repository_1 = require("./repository/Repository");
 var bcrypt = __importStar(require("bcrypt"));
 var UserSchema_1 = require("../schemas/UserSchema");
 var BadRequest_1 = __importDefault(require("../exceptions/BadRequest"));
+var AuthService_1 = require("../services/AuthService");
+var authService = new AuthService_1.AuthServices();
 var UserRepository = /** @class */ (function (_super) {
     __extends(UserRepository, _super);
     function UserRepository() {
@@ -85,7 +87,7 @@ var UserRepository = /** @class */ (function (_super) {
     }
     UserRepository.prototype.login = function (email, password) {
         return __awaiter(this, void 0, void 0, function () {
-            var error, loginUser;
+            var error, loginUser, token;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -105,7 +107,8 @@ var UserRepository = /** @class */ (function (_super) {
                     case 2:
                         if (!(_a.sent()))
                             return [2 /*return*/, null];
-                        return [2 /*return*/, loginUser];
+                        token = authService.generateToken(loginUser);
+                        return [2 /*return*/, [loginUser, token]];
                 }
             });
         });

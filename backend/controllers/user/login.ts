@@ -8,13 +8,17 @@ const repository: UserRepository = new UserRepository(UserModel);
 export const login: RequestHandler = async (req, res) => {
   const request: User = req.body;
   try {
-    const user: User | null = await repository.login(
+    const user: [User, string] | null = await repository.login(
       request["email"],
       request["password"] as string
     );
 
     if (!user) return res.status(UserNotFound.httpCode).send(UserNotFound);
 
-    return res.status(200).send(user);
+    return res
+      .status(200)
+      .header("Authorization", user[1])
+      .header("access-control-expose-headers", "Authorization")
+      .send(user[0]);
   } catch (error) {}
 };

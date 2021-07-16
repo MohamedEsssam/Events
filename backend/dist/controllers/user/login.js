@@ -58,7 +58,11 @@ var login = function (req, res) { return __awaiter(void 0, void 0, void 0, funct
                 user = _a.sent();
                 if (!user)
                     return [2 /*return*/, res.status(UserNotFound_1.default.httpCode).send(UserNotFound_1.default)];
-                return [2 /*return*/, res.status(200).send(user)];
+                return [2 /*return*/, res
+                        .status(200)
+                        .header("Authorization", user[1])
+                        .header("access-control-expose-headers", "Authorization")
+                        .send(user[0])];
             case 3:
                 error_1 = _a.sent();
                 return [3 /*break*/, 4];
