@@ -1,11 +1,12 @@
+import { Socket } from "socket.io";
 import { Server } from "http";
 
-let io: any;
+let io: Socket;
 export class SocketIo {
-  constructor(private server: Server) {}
+  constructor() {}
 
-  init(): any {
-    io = require("socket.io")(this.server);
+  init(server: Server): Socket {
+    io = require("socket.io")(server);
     io.on("connection", (socket: SocketIo) => {
       console.log("client connected");
     });
@@ -13,7 +14,7 @@ export class SocketIo {
     return io;
   }
 
-  getIo(): any {
+  getIo(): Socket {
     if (!io) throw new Error("socket.io not initialized");
 
     return io;

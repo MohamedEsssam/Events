@@ -19,14 +19,14 @@ const app: express.Application = express();
 const server: Server = app.listen(9000, () => {
   console.log("app listening on port 9000!");
 });
-const socketIo: SocketIo = new SocketIo(server);
+const socketIo: SocketIo = new SocketIo();
 
 require("./startup/config")();
 require("./startup/cors")(app);
 require("./startup/swagger")(app);
 require("./startup/connectDB");
 require("./startup/routes")(app);
-socketIo.init();
+socketIo.init(server);
 
 // const repository: EventRepository = new EventRepository(EventModel);
 // const user: Event_ = {

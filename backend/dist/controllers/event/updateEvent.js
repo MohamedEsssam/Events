@@ -40,12 +40,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateEvent = void 0;
+var socket_io_1 = require("../../startup/socket.io");
 var EventRepository_1 = require("../../repositories/EventRepository");
 var event_1 = __importDefault(require("../../models/event"));
 var BadRequest_1 = __importDefault(require("../../exceptions/BadRequest"));
 var NotFound_1 = __importDefault(require("../../exceptions/NotFound"));
 var InternalServer_1 = __importDefault(require("../../exceptions/InternalServer"));
 var repository = new EventRepository_1.EventRepository(event_1.default);
+var io = new socket_io_1.SocketIo();
 var updateEvent = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var request, id, event_2, error_1;
     return __generator(this, function (_a) {
@@ -61,6 +63,7 @@ var updateEvent = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 event_2 = _a.sent();
                 if (!event_2)
                     return [2 /*return*/, res.status(NotFound_1.default.httpCode).send(NotFound_1.default)];
+                io.getIo().emit("event", { action: "update", event: event_2 });
                 return [2 /*return*/, res.status(200).send(event_2)];
             case 3:
                 error_1 = _a.sent();

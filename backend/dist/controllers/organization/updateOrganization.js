@@ -40,12 +40,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateOrganization = void 0;
+var socket_io_1 = require("../../startup/socket.io");
 var OrganizationRepository_1 = require("../../repositories/OrganizationRepository");
 var organization_1 = __importDefault(require("../../models/organization"));
 var BadRequest_1 = __importDefault(require("../../exceptions/BadRequest"));
 var NotFound_1 = __importDefault(require("../../exceptions/NotFound"));
 var InternalServer_1 = __importDefault(require("../../exceptions/InternalServer"));
 var repository = new OrganizationRepository_1.OrganizationRepository(organization_1.default);
+var io = new socket_io_1.SocketIo();
 var updateOrganization = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var request, id, organization, error_1;
     return __generator(this, function (_a) {
@@ -61,6 +63,10 @@ var updateOrganization = function (req, res) { return __awaiter(void 0, void 0, 
                 organization = _a.sent();
                 if (!organization)
                     return [2 /*return*/, res.status(NotFound_1.default.httpCode).send(NotFound_1.default)];
+                io.getIo().emit("organization", {
+                    action: "update",
+                    organization: organization,
+                });
                 return [2 /*return*/, res.status(200).send(organization)];
             case 3:
                 error_1 = _a.sent();

@@ -40,14 +40,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateParticipant = void 0;
+var socket_io_1 = require("../../startup/socket.io");
 var ParticipantRepository_1 = require("../../repositories/ParticipantRepository");
 var participant_1 = __importDefault(require("../../models/participant"));
 var BadRequest_1 = __importDefault(require("../../exceptions/BadRequest"));
 var NotFound_1 = __importDefault(require("../../exceptions/NotFound"));
 var InternalServer_1 = __importDefault(require("../../exceptions/InternalServer"));
 var repository = new ParticipantRepository_1.ParticipantRepository(participant_1.default);
+var io = new socket_io_1.SocketIo();
 var updateParticipant = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var request, id, participate, error_1;
+    var request, id, participant, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -58,10 +60,14 @@ var updateParticipant = function (req, res) { return __awaiter(void 0, void 0, v
                 _a.trys.push([1, 3, , 4]);
                 return [4 /*yield*/, repository.update(id, request)];
             case 2:
-                participate = _a.sent();
-                if (!participate)
+                participant = _a.sent();
+                if (!participant)
                     return [2 /*return*/, res.status(NotFound_1.default.httpCode).send(NotFound_1.default)];
-                return [2 /*return*/, res.status(200).send(participate)];
+                io.getIo().emit("participant", {
+                    action: "update",
+                    participant: participant,
+                });
+                return [2 /*return*/, res.status(200).send(participant)];
             case 3:
                 error_1 = _a.sent();
                 if (error_1.message === "You entered invalid data.")

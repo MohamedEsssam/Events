@@ -9,9 +9,9 @@ const repository: ParticipantRepository = new ParticipantRepository(
 );
 export const getParticipants: RequestHandler = async (req, res) => {
   try {
-    const participate: Participant[] | null = await repository.getAll();
+    const participant: Participant[] | null = await repository.getAll();
 
-    return res.status(200).send(participate);
+    return res.status(200).send(participant);
   } catch (error) {
     return res.status(InternalServer.httpCode).send(InternalServer);
   }

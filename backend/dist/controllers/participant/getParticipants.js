@@ -45,15 +45,15 @@ var participant_1 = __importDefault(require("../../models/participant"));
 var InternalServer_1 = __importDefault(require("../../exceptions/InternalServer"));
 var repository = new ParticipantRepository_1.ParticipantRepository(participant_1.default);
 var getParticipants = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var participate, error_1;
+    var participant, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, repository.getAll()];
             case 1:
-                participate = _a.sent();
-                return [2 /*return*/, res.status(200).send(participate)];
+                participant = _a.sent();
+                return [2 /*return*/, res.status(200).send(participant)];
             case 2:
                 error_1 = _a.sent();
                 return [2 /*return*/, res.status(InternalServer_1.default.httpCode).send(InternalServer_1.default)];

@@ -46,7 +46,7 @@ var NotFound_1 = __importDefault(require("../../exceptions/NotFound"));
 var InternalServer_1 = __importDefault(require("../../exceptions/InternalServer"));
 var repository = new ParticipantRepository_1.ParticipantRepository(participant_1.default);
 var getParticipant = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, participate, error_1;
+    var id, participant, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -56,10 +56,10 @@ var getParticipant = function (req, res) { return __awaiter(void 0, void 0, void
                 _a.trys.push([1, 3, , 4]);
                 return [4 /*yield*/, repository.getOne(id)];
             case 2:
-                participate = _a.sent();
-                if (!participate)
+                participant = _a.sent();
+                if (!participant)
                     return [2 /*return*/, res.status(NotFound_1.default.httpCode).send(NotFound_1.default)];
-                return [2 /*return*/, res.status(200).send(participate)];
+                return [2 /*return*/, res.status(200).send(participant)];
             case 3:
                 error_1 = _a.sent();
                 return [2 /*return*/, res.status(InternalServer_1.default.httpCode).send(InternalServer_1.default)];

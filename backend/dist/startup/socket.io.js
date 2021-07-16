@@ -3,11 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SocketIo = void 0;
 var io;
 var SocketIo = /** @class */ (function () {
-    function SocketIo(server) {
-        this.server = server;
+    function SocketIo() {
     }
-    SocketIo.prototype.init = function () {
-        io = require("socket.io")(this.server);
+    SocketIo.prototype.init = function (server) {
+        io = require("socket.io")(server);
         io.on("connection", function (socket) {
             console.log("client connected");
         });

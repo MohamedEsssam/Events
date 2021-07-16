@@ -9,13 +9,13 @@ var app = express_1.default();
 var server = app.listen(9000, function () {
     console.log("app listening on port 9000!");
 });
-var socketIo = new socket_io_1.SocketIo(server);
+var socketIo = new socket_io_1.SocketIo();
 require("./startup/config")();
 require("./startup/cors")(app);
 require("./startup/swagger")(app);
 require("./startup/connectDB");
 require("./startup/routes")(app);
-socketIo.init();
+socketIo.init(server);
 // const repository: EventRepository = new EventRepository(EventModel);
 // const user: Event_ = {
 //   title: "hhhh",
