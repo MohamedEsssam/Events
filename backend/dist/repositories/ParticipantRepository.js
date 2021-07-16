@@ -60,11 +60,15 @@ var EncryptPasswordService_1 = require("../services/EncryptPasswordService");
 var ParticipantSchema_1 = require("../schemas/ParticipantSchema");
 var BadRequest_1 = __importDefault(require("../exceptions/BadRequest"));
 var EmailService_1 = require("../services/EmailService");
+var EventRepository_1 = require("./EventRepository");
+var event_1 = __importDefault(require("../models/event"));
 var emailService = new EmailService_1.EmailServices();
 var ParticipantRepository = /** @class */ (function (_super) {
     __extends(ParticipantRepository, _super);
     function ParticipantRepository() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.eventRepository = new EventRepository_1.EventRepository(event_1.default);
+        return _this;
     }
     ParticipantRepository.prototype.register = function (participant) {
         return __awaiter(this, void 0, void 0, function () {
@@ -111,8 +115,11 @@ var ParticipantRepository = /** @class */ (function (_super) {
                         if (!existParticipant)
                             return [2 /*return*/, null];
                         (_a = existParticipant.events) === null || _a === void 0 ? void 0 : _a.push(eventId);
-                        return [4 /*yield*/, (existParticipant === null || existParticipant === void 0 ? void 0 : existParticipant.save())];
-                    case 2: return [2 /*return*/, (_b.sent())];
+                        return [4 /*yield*/, this.eventRepository.addParticipant(eventId, id)];
+                    case 2:
+                        _b.sent();
+                        return [4 /*yield*/, existParticipant.save()];
+                    case 3: return [2 /*return*/, (_b.sent())];
                 }
             });
         });
@@ -131,8 +138,11 @@ var ParticipantRepository = /** @class */ (function (_super) {
                         if (!existParticipant)
                             return [2 /*return*/, null];
                         (_a = existParticipant.events) === null || _a === void 0 ? void 0 : _a.splice((_b = existParticipant.events) === null || _b === void 0 ? void 0 : _b.indexOf(eventId), 1);
-                        return [4 /*yield*/, (existParticipant === null || existParticipant === void 0 ? void 0 : existParticipant.save())];
-                    case 2: return [2 /*return*/, (_c.sent())];
+                        return [4 /*yield*/, this.eventRepository.removeParticipant(eventId, id)];
+                    case 2:
+                        _c.sent();
+                        return [4 /*yield*/, existParticipant.save()];
+                    case 3: return [2 /*return*/, (_c.sent())];
                 }
             });
         });

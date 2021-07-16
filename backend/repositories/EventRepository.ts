@@ -14,4 +14,28 @@ export class EventRepository extends Repository<Event> {
 
     return (await createdEvent.save()) as EnforceDocument<Event, {}>;
   }
+
+  public async addParticipant(id: string, userId: string): Promise<boolean> {
+    const existEvent = await this.model.findById({ _id: id });
+    if (!existEvent) return false;
+
+    existEvent?.participants?.push(userId);
+    await existEvent.save();
+
+    return true;
+  }
+
+  public async removeParticipant(id: string, userId: string): Promise<boolean> {
+    const existEvent = await this.model.findById({ _id: id });
+    if (!existEvent) return false;
+
+    existEvent.participants?.splice(
+      existEvent.participants?.indexOf(userId),
+      1
+    );
+
+    await existEvent.save();
+
+    return true;
+  }
 }

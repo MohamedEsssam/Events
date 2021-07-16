@@ -9,11 +9,11 @@ import { authJwt } from "../../middlewares/authJwt";
 
 const router: Router = Router();
 
+router.put("/participate", authJwt, participate);
+router.put("/un_participate", authJwt, unParticipate);
 router.put("/:id", authJwt, updateParticipant);
 router.delete("/:id", authJwt, deleteParticipant);
 router.get("/:id", authJwt, getParticipant);
 router.get("/", authJwt, getParticipants);
-router.put("/participate", authJwt, participate);
-router.put("/un_participate", authJwt, unParticipate);
 
 export default router;

@@ -5,10 +5,12 @@ import { encryptPassword } from "../services/EncryptPasswordService";
 import { validateParticipantSchema } from "../schemas/ParticipantSchema";
 import BadRequest from "../exceptions/BadRequest";
 import { EmailServices } from "../services/EmailService";
+import { EventRepository } from "./EventRepository";
+import EventModel from "../models/event";
 
 const emailService = new EmailServices();
-
 export class ParticipantRepository extends Repository<Participant> {
+  private eventRepository: EventRepository = new EventRepository(EventModel);
   public async register(participant: Participant): Promise<Participant | null> {
     const { error } = validateParticipantSchema(participant);
     if (error) throw new Error(BadRequest.description);
@@ -44,7 +46,9 @@ export class ParticipantRepository extends Repository<Participant> {
 
     existParticipant.events?.push(eventId);
 
-    return (await existParticipant?.save()) as EnforceDocument<Participant, {}>;
+    await this.eventRepository.addParticipant(eventId, id);
+
+    return (await existParticipant.save()) as EnforceDocument<Participant, {}>;
   }
 
   public async unParticipate(
@@ -61,6 +65,8 @@ export class ParticipantRepository extends Repository<Participant> {
       1
     );
 
-    return (await existParticipant?.save()) as EnforceDocument<Participant, {}>;
+    await this.eventRepository.removeParticipant(eventId, id);
+
+    return (await existParticipant.save()) as EnforceDocument<Participant, {}>;
   }
 }

@@ -80,6 +80,46 @@ var EventRepository = /** @class */ (function (_super) {
             });
         });
     };
+    EventRepository.prototype.addParticipant = function (id, userId) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function () {
+            var existEvent;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, this.model.findById({ _id: id })];
+                    case 1:
+                        existEvent = _b.sent();
+                        if (!existEvent)
+                            return [2 /*return*/, false];
+                        (_a = existEvent === null || existEvent === void 0 ? void 0 : existEvent.participants) === null || _a === void 0 ? void 0 : _a.push(userId);
+                        return [4 /*yield*/, existEvent.save()];
+                    case 2:
+                        _b.sent();
+                        return [2 /*return*/, true];
+                }
+            });
+        });
+    };
+    EventRepository.prototype.removeParticipant = function (id, userId) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var existEvent;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0: return [4 /*yield*/, this.model.findById({ _id: id })];
+                    case 1:
+                        existEvent = _c.sent();
+                        if (!existEvent)
+                            return [2 /*return*/, false];
+                        (_a = existEvent.participants) === null || _a === void 0 ? void 0 : _a.splice((_b = existEvent.participants) === null || _b === void 0 ? void 0 : _b.indexOf(userId), 1);
+                        return [4 /*yield*/, existEvent.save()];
+                    case 2:
+                        _c.sent();
+                        return [2 /*return*/, true];
+                }
+            });
+        });
+    };
     return EventRepository;
 }(Repository_1.Repository));
 exports.EventRepository = EventRepository;
