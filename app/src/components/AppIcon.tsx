@@ -12,7 +12,7 @@ export interface Props {
 const AppIcon: React.FC<Props> = ({
   color = "#000",
   backgroundColor = "#fff",
-  name,
+  name = undefined,
   size = 30,
 }) => {
   return (
