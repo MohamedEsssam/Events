@@ -1,28 +1,84 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import AppIcon from "./src/components/AppIcon";
-import AppItemSeparator from "./src/components/AppItemSeparator";
-import AppScreen from "./src/components/AppScreen";
 
-import AppText from "./src/components/AppText";
-import AppTextInput from "./src/components/AppTextInput";
+import AppIcon from "./src/components/AppIcon";
+import AppListItem from "./src/components/AppListItem";
+import AppScreen from "./src/components/AppScreen";
+import AppTag from "./src/components/AppTag";
+import AppEventList from "./src/components/lists/AppEventList";
+import AppTagsList from "./src/components/lists/AppTagsList";
+import { Color } from "./src/config/Color";
 
 const App: React.FC = () => {
   return (
     <AppScreen>
-      <View style={styles.container}>
-        <AppItemSeparator />
-        <AppIcon name="email" />
-        <AppText>hello events</AppText>
-        <AppTextInput
-          iconType="email"
-          iconSize={30}
-          iconColor="#4ecdc4"
-          iconBackgroundColor="#ffffff"
-          placeholder="Login"
-          style={{ backgroundColor: "red", width: "60%" }}
-        />
-      </View>
+      <AppEventList
+        items={[
+          {
+            title: "New Event",
+            tags: [
+              { title: "festivals" },
+              { title: "SpeakerSession" },
+              { title: "Competitions" },
+              { title: "Sponsorships" },
+            ],
+          },
+          {
+            title: "New Event1",
+            tags: [
+              { title: "festivals" },
+              { title: "SpeakerSession" },
+              { title: "Competitions" },
+              { title: "Sponsorships" },
+            ],
+          },
+          {
+            title: "New Event2",
+            tags: [
+              { title: "festivals" },
+              { title: "SpeakerSession" },
+              { title: "Competitions" },
+              { title: "Sponsorships" },
+            ],
+          },
+          {
+            title: "New Event3",
+            tags: [
+              { title: "festivals" },
+              { title: "SpeakerSession" },
+              { title: "Competitions" },
+              { title: "Sponsorships" },
+            ],
+          },
+          {
+            title: "New Event4",
+            tags: [
+              { title: "festivals" },
+              { title: "SpeakerSession" },
+              { title: "Competitions" },
+              { title: "Sponsorships" },
+            ],
+          },
+          {
+            title: "New Event5",
+            tags: [
+              { title: "festivals" },
+              { title: "SpeakerSession" },
+              { title: "Competitions" },
+              { title: "Sponsorships" },
+            ],
+          },
+          {
+            title: "New Event6",
+            tags: [
+              { title: "festivals" },
+              { title: "SpeakerSession" },
+              { title: "Competitions" },
+              { title: "Sponsorships" },
+            ],
+          },
+        ]}
+      />
     </AppScreen>
   );
 };
@@ -30,7 +86,7 @@ const App: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Color.light,
   },
 });
 

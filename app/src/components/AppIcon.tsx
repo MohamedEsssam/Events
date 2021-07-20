@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 export interface Props {
   name: string | any;
@@ -10,9 +10,9 @@ export interface Props {
 }
 
 const AppIcon: React.FC<Props> = ({
+  name = undefined,
   color = "#000",
   backgroundColor = "#fff",
-  name = undefined,
   size = 30,
 }) => {
   return (
@@ -22,7 +22,7 @@ const AppIcon: React.FC<Props> = ({
         { backgroundColor, width: size, height: size, borderRadius: size / 2 },
       ]}
     >
-      <MaterialCommunityIcons name={name} color={color} size={size / 2} />
+      <FontAwesome name={name} color={color} size={size / 2} />
     </View>
   );
 };

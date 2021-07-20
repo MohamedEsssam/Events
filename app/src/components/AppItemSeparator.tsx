@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
+import { Color } from "../config/Color";
 
 export interface Props {}
 
@@ -9,10 +10,10 @@ const AppItemSeparator: React.FC<Props> = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "grey",
-    width: "70%",
+    backgroundColor: Color.light,
+    width: "50%",
     height: 1,
-    left: "15%",
+    left: "26%",
   },
 });
 

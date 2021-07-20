@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, StyleSheet, Platform } from "react-native";
+import { Platform, Text, StyleSheet } from "react-native";
 
 export interface Props {
   style?: object;
@@ -12,6 +12,7 @@ const AppText: React.FC<Props> = ({ children, style }) => {
 const styles = StyleSheet.create({
   text: {
     fontSize: 18,
+    fontStyle: "italic",
     fontFamily: Platform.OS === "ios" ? "Avenir" : "Roboto",
   },
 });
