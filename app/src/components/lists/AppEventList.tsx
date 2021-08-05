@@ -16,7 +16,12 @@ const AppEventList: React.FC<Props> = ({ items }) => {
         showsVerticalScrollIndicator={false}
         ItemSeparatorComponent={AppItemSeparator}
         renderItem={({ item }) => (
-          <AppListItem tags={item["tags"]} date="" location="" />
+          <AppListItem
+            title={item["title"]}
+            tags={item["tags"]}
+            date=""
+            location=""
+          />
         )}
         keyExtractor={(item) => item["title"].toString()}
       />

@@ -7,12 +7,13 @@ import AppTagsList from "./lists/AppTagsList";
 import { Color } from "../config/Color";
 
 export interface Props {
+  title: string;
   tags: { title: string }[];
   location: string;
   date: string;
 }
 
-const AppListItem: React.FC<Props> = ({ tags, location, date }) => {
+const AppListItem: React.FC<Props> = ({ title, tags, location, date }) => {
   return (
     <TouchableOpacity>
       <View style={styles.container}>
@@ -20,7 +21,7 @@ const AppListItem: React.FC<Props> = ({ tags, location, date }) => {
           <AppText
             style={{ fontSize: 30, fontStyle: "italic", fontWeight: "bold" }}
           >
-            New Event
+            {title}
           </AppText>
           <AppTagsList items={tags} style={{ backgroundColor: "#3EB489" }} />
           <AppTag
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     borderRadius: 20,
     margin: 10,
-    height: 210,
+    height: 290,
     shadowColor: Color.medium,
     shadowOffset: { height: 1, width: 1 },
     shadowOpacity: 0.7,

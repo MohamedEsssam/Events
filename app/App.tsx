@@ -1,9 +1,15 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import {
+  Keyboard,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 
 import AppIcon from "./src/components/AppIcon";
 import AppListItem from "./src/components/AppListItem";
 import AppScreen from "./src/components/AppScreen";
+import AppSearchItem from "./src/components/AppSearchItem";
 import AppTag from "./src/components/AppTag";
 import AppEventList from "./src/components/lists/AppEventList";
 import AppTagsList from "./src/components/lists/AppTagsList";
@@ -11,11 +17,12 @@ import { Color } from "./src/config/Color";
 
 const App: React.FC = () => {
   return (
-    <AppScreen>
+    <>
+      <AppSearchItem />
       <AppEventList
         items={[
           {
-            title: "New Event",
+            title: "Stack Holder Meetup",
             tags: [
               { title: "festivals" },
               { title: "SpeakerSession" },
@@ -24,7 +31,7 @@ const App: React.FC = () => {
             ],
           },
           {
-            title: "New Event1",
+            title: "Product Design meeting",
             tags: [
               { title: "festivals" },
               { title: "SpeakerSession" },
@@ -33,7 +40,7 @@ const App: React.FC = () => {
             ],
           },
           {
-            title: "New Event2",
+            title: "Design Team Scrum Master",
             tags: [
               { title: "festivals" },
               { title: "SpeakerSession" },
@@ -42,7 +49,7 @@ const App: React.FC = () => {
             ],
           },
           {
-            title: "New Event3",
+            title: "Product Designer Meeting",
             tags: [
               { title: "festivals" },
               { title: "SpeakerSession" },
@@ -51,7 +58,7 @@ const App: React.FC = () => {
             ],
           },
           {
-            title: "New Event4",
+            title: "Cairokee musical Band",
             tags: [
               { title: "festivals" },
               { title: "SpeakerSession" },
@@ -79,7 +86,7 @@ const App: React.FC = () => {
           },
         ]}
       />
-    </AppScreen>
+    </>
   );
 };
 
