@@ -4,14 +4,14 @@ import { View, StyleSheet, FlatList, Text } from "react-native";
 import AppTag from "../AppTag";
 
 export interface Props {
-  items: Array<{ title: string }>;
+  categories: Array<string>;
   style?: object;
   fontSize?: number;
   fontColor?: string;
 }
 
 const AppTagsList: React.FC<Props> = ({
-  items,
+  categories,
   style,
   fontColor = "#000",
   fontSize = 9,
@@ -19,19 +19,19 @@ const AppTagsList: React.FC<Props> = ({
   return (
     <View style={styles.container}>
       <FlatList
-        data={items}
+        data={categories}
         renderItem={({ item }) => (
           <View>
             <AppTag
-              title={item["title"]}
+              title={item}
               style={style}
               fontColor={fontColor}
               fontSize={fontSize}
             />
           </View>
         )}
-        numColumns={Math.round(items.length / 2)}
-        keyExtractor={(item) => item["title"].toString()}
+        numColumns={Math.round(categories.length / 2)}
+        keyExtractor={(item) => item.toString()}
       />
     </View>
   );

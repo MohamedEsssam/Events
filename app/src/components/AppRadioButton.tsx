@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
+import * as Location from "expo-location";
+
 import AppText from "./AppText";
 
 export interface Props {}
-
 const AppRadioButton: React.FC<Props> = () => {
   const choices: Array<string> = ["Ongoing", "Joined"];
   const [selected, setSelected] = useState("Ongoing");
@@ -17,13 +18,11 @@ const AppRadioButton: React.FC<Props> = () => {
       {choices &&
         choices.map((choice: string) => {
           return (
-            <>
-              <View key={choice}>
-                <TouchableOpacity onPress={() => onSelected(choice)}>
-                  <AppText style={styles.text}>{choice}</AppText>
-                </TouchableOpacity>
-              </View>
-            </>
+            <View key={choice}>
+              <TouchableOpacity onPress={() => onSelected(choice)}>
+                <AppText style={styles.text}>{choice}</AppText>
+              </TouchableOpacity>
+            </View>
           );
         })}
       <View style={{ flexDirection: "row", top: 54, right: "50%" }}>

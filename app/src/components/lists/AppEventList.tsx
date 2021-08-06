@@ -1,11 +1,12 @@
 import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
+import Event from "../../entities/Event";
 
 import AppItemSeparator from "../AppItemSeparator";
 import AppListItem from "../AppListItem";
 
 export interface Props {
-  items: { title: string; tags: { title: string }[] }[];
+  items: Array<Event> | undefined;
 }
 
 const AppEventList: React.FC<Props> = ({ items }) => {
@@ -15,15 +16,8 @@ const AppEventList: React.FC<Props> = ({ items }) => {
         data={items}
         showsVerticalScrollIndicator={false}
         ItemSeparatorComponent={AppItemSeparator}
-        renderItem={({ item }) => (
-          <AppListItem
-            title={item["title"]}
-            tags={item["tags"]}
-            date=""
-            location=""
-          />
-        )}
-        keyExtractor={(item) => item["title"].toString()}
+        renderItem={({ item }) => <AppListItem {...item} />}
+        keyExtractor={(item) => item["_id"] as string}
       />
     </View>
   );

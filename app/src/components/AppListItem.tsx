@@ -1,10 +1,12 @@
 import React from "react";
 import { View, TouchableOpacity, Image, StyleSheet } from "react-native";
+import moment from "moment";
 
 import AppTag from "./AppTag";
 import AppText from "./AppText";
 import AppTagsList from "./lists/AppTagsList";
 import { Color } from "../config/Color";
+import Event_ from "../entities/Event";
 
 export interface Props {
   title: string;
@@ -13,7 +15,13 @@ export interface Props {
   date: string;
 }
 
-const AppListItem: React.FC<Props> = ({ title, tags, location, date }) => {
+const AppListItem: React.FC<Event_> = ({
+  title,
+  categories,
+  holdOn,
+  location,
+  owner,
+}) => {
   return (
     <TouchableOpacity>
       <View style={styles.container}>
@@ -23,7 +31,10 @@ const AppListItem: React.FC<Props> = ({ title, tags, location, date }) => {
           >
             {title}
           </AppText>
-          <AppTagsList items={tags} style={{ backgroundColor: "#3EB489" }} />
+          <AppTagsList
+            categories={categories}
+            style={{ backgroundColor: "#3EB489" }}
+          />
           <AppTag
             iconType="location-arrow"
             title="1-3 miami,Alexandria"
@@ -39,7 +50,7 @@ const AppListItem: React.FC<Props> = ({ title, tags, location, date }) => {
             </View>
             <View style={{ paddingLeft: 40 }}>
               <AppTag
-                title="3 Jun 2020"
+                title={moment(holdOn).calendar()}
                 iconType="calendar"
                 style={{ backgroundColor: "#246EE9" }}
               />
