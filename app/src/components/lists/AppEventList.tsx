@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import Event from "../../entities/Event";
 
@@ -7,9 +7,11 @@ import AppListItem from "../AppListItem";
 
 export interface Props {
   items: Array<Event> | undefined;
+  onRefresh: Function;
 }
 
-const AppEventList: React.FC<Props> = ({ items }) => {
+const AppEventList: React.FC<Props> = ({ items, onRefresh }) => {
+  const [refreshing, setRefreshing] = useState<boolean>(false);
   return (
     <View style={styles.container}>
       <FlatList
@@ -18,6 +20,12 @@ const AppEventList: React.FC<Props> = ({ items }) => {
         ItemSeparatorComponent={AppItemSeparator}
         renderItem={({ item }) => <AppListItem {...item} />}
         keyExtractor={(item) => item["_id"] as string}
+        refreshing={refreshing}
+        onRefresh={() => {
+          setRefreshing(true);
+          onRefresh();
+          setRefreshing(false);
+        }}
       />
     </View>
   );

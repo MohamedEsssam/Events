@@ -1,4 +1,4 @@
-type location = { lat: number; lng: number };
+type location = { _id: string; coordinates: Array<number>; type: "Point" };
 interface Event_ {
   readonly _id?: string;
   title: string;

@@ -33,7 +33,7 @@ const EventsListScreen: React.FC<Props> = React.memo((props) => {
   return (
     <>
       <AppSearchItem />
-      <AppEventList items={FetchedEvents} />
+      <AppEventList items={FetchedEvents} onRefresh={fetchEvents} />
     </>
   );
 });

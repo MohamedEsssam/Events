@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, TouchableOpacity, Image, StyleSheet } from "react-native";
+import * as Location from "expo-location";
 import moment from "moment";
 
 import AppTag from "./AppTag";
@@ -8,13 +9,6 @@ import AppTagsList from "./lists/AppTagsList";
 import { Color } from "../config/Color";
 import Event_ from "../entities/Event";
 
-export interface Props {
-  title: string;
-  tags: { title: string }[];
-  location: string;
-  date: string;
-}
-
 const AppListItem: React.FC<Event_> = ({
   title,
   categories,
@@ -22,6 +16,30 @@ const AppListItem: React.FC<Event_> = ({
   location,
   owner,
 }) => {
+  const [geoCodeLocation, setGeoCodeLocation] = useState<string>("");
+  useEffect(() => {
+    getLocation();
+  });
+
+  const getLocation = async (): Promise<void> => {
+    const locationObject = await Location.reverseGeocodeAsync({
+      latitude: location["coordinates"][0],
+      longitude: location["coordinates"][1],
+    });
+
+    setGeoCodeLocation(
+      locationObject[0].name +
+        ", " +
+        locationObject[0].district +
+        ", " +
+        locationObject[0].region +
+        " " +
+        locationObject[0].postalCode +
+        ", " +
+        locationObject[0].isoCountryCode
+    );
+  };
+
   return (
     <TouchableOpacity>
       <View style={styles.container}>
@@ -37,7 +55,7 @@ const AppListItem: React.FC<Event_> = ({
           />
           <AppTag
             iconType="location-arrow"
-            title="1-3 miami,Alexandria"
+            title={geoCodeLocation}
             style={{ backgroundColor: "#246EE9" }}
           />
           <View style={{ flexDirection: "row" }}>
@@ -50,9 +68,9 @@ const AppListItem: React.FC<Event_> = ({
             </View>
             <View style={{ paddingLeft: 40 }}>
               <AppTag
-                title={moment(holdOn).calendar()}
+                title={moment(holdOn).format("ddd, MMM D, YYYY")}
                 iconType="calendar"
-                style={{ backgroundColor: "#246EE9" }}
+                style={{ backgroundColor: "#246EE9", right: 20 }}
               />
             </View>
           </View>
