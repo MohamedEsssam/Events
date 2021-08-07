@@ -6,7 +6,11 @@ export interface Props {
 }
 
 const AppText: React.FC<Props> = ({ children, style }) => {
-  return <Text style={[styles.text, style]}>{children}</Text>;
+  return (
+    <Text style={[styles.text, style]} numberOfLines={5} ellipsizeMode="tail">
+      {children}
+    </Text>
+  );
 };
 
 const styles = StyleSheet.create({

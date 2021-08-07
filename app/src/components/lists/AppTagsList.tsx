@@ -19,6 +19,7 @@ const AppTagsList: React.FC<Props> = ({
   return (
     <View style={styles.container}>
       <FlatList
+        scrollEnabled={false}
         data={categories}
         renderItem={({ item }) => (
           <View>
