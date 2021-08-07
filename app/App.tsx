@@ -3,9 +3,15 @@ import { StyleSheet } from "react-native";
 
 import EventsListScreen from "./src/screens/EventsListScreen";
 import { Color } from "./src/config/Color";
+import AppOfflineNotice from "./src/components/AppOfflineNotice";
 
 const App: React.FC = () => {
-  return <EventsListScreen />;
+  return (
+    <>
+      <AppOfflineNotice />
+      <EventsListScreen />
+    </>
+  );
 };
 
 const styles = StyleSheet.create({
