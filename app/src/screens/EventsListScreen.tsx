@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { ApiResponse } from "apisauce";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import openSocket, { Socket } from "socket.io-client";
 
 import { EventServices } from "../services/EventServices";
 import Event from "../entities/Event";
 import AppSearchItem from "../components/AppSearchItem";
 import AppEventList from "../components/lists/AppEventList";
+import { Color } from "../config/Color";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 export interface Props {}
 
 const service = new EventServices();
-const EventsListScreen: React.FC<Props> = React.memo((props) => {
+
+//@ts-ignore
+const EventsListScreen: React.FC<Props> = React.memo(({ navigation }) => {
   const [FetchedEvents, setFetchedEvents] = useState<Array<Event> | undefined>(
     []
   );
@@ -31,15 +35,18 @@ const EventsListScreen: React.FC<Props> = React.memo((props) => {
     setFetched(true);
   };
   return (
-    <>
+    <View style={styles.container}>
       <AppSearchItem />
       <AppEventList items={FetchedEvents} onRefresh={fetchEvents} />
-    </>
+    </View>
   );
 });
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    backgroundColor: Color.white,
+  },
 });
 
 export default EventsListScreen;

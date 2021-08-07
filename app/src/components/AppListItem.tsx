@@ -7,14 +7,15 @@ import AppTag from "./AppTag";
 import AppText from "./AppText";
 import AppTagsList from "./lists/AppTagsList";
 import { Color } from "../config/Color";
-import Event_ from "../entities/Event";
+import Event from "../entities/Event";
 
-const AppListItem: React.FC<Event_> = ({
+const AppListItem: React.FC<Event> = ({
   title,
   categories,
   holdOn,
   location,
   owner,
+  onPress,
 }) => {
   const [geoCodeLocation, setGeoCodeLocation] = useState<string>("");
   useEffect(() => {
@@ -41,7 +42,7 @@ const AppListItem: React.FC<Event_> = ({
   };
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <View style={styles.item}>
           <AppText

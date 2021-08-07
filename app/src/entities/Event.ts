@@ -10,6 +10,7 @@ interface Event_ {
   categories: string[];
   owner: string;
   participants?: string[];
+  onPress?: any;
 }
 
 export default Event_;
