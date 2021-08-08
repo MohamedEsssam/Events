@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { ApiResponse } from "apisauce";
 import { StyleSheet, View } from "react-native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import openSocket, { Socket } from "socket.io-client";
+import { ApiResponse } from "apisauce";
+import { FeedNavigatorParams } from "../navigators/navigatorTypes/NavigatorTypes";
 
 import { EventServices } from "../services/EventServices";
 import Event from "../entities/Event";
 import AppSearchItem from "../components/AppSearchItem";
 import AppEventList from "../components/lists/AppEventList";
 import { Color } from "../config/Color";
-import { StackNavigationProp } from "@react-navigation/stack";
 
-export interface Props {}
+export interface Props {
+  navigation: StackNavigationProp<FeedNavigatorParams, "EventListings">;
+}
 
 const service = new EventServices();
 
-//@ts-ignore
 const EventsListScreen: React.FC<Props> = React.memo(({ navigation }) => {
   const [FetchedEvents, setFetchedEvents] = useState<Array<Event> | undefined>(
     []

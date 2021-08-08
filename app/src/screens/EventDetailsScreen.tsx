@@ -1,26 +1,69 @@
-import React from "react";
-import { View, StyleSheet, Image } from "react-native";
-import AppIcon from "../components/AppIcon";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Button,
+  TouchableOpacity,
+} from "react-native";
+import * as Location from "expo-location";
+import moment from "moment";
 
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RouteProp } from "@react-navigation/native";
+import { FeedNavigatorParams } from "../navigators/navigatorTypes/NavigatorTypes";
+import Event from "../entities/Event";
+
+import AppIcon from "../components/AppIcon";
 import AppTag from "../components/AppTag";
 import AppText from "../components/AppText";
 import AppTagsList from "../components/lists/AppTagsList";
 import { Color } from "../config/Color";
 
-export interface Props {}
+export interface Props {
+  route: RouteProp<FeedNavigatorParams, "EventDetails">;
+  navigation: StackNavigationProp<FeedNavigatorParams, "EventListings">;
+}
 
-const EventDetailsScreen: React.FC<Props> = (props) => {
+const EventDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
+  const event: Event | undefined = route["params"];
+  const [geoCodeLocation, setGeoCodeLocation] = useState<string>("");
+  useEffect(() => {
+    getLocation();
+  });
+
+  const getLocation = async (): Promise<void> => {
+    const locationObject = await Location.reverseGeocodeAsync({
+      latitude: event!["location"]["coordinates"][0],
+      longitude: event!["location"]["coordinates"][1],
+    });
+
+    setGeoCodeLocation(locationObject[0].name as string);
+  };
+
   return (
     <View style={styles.container}>
       <Image source={require("../../assets/resp3.jpeg")} style={styles.image} />
       <View style={styles.items}>
         <View>
-          <View style={{ width: 250 }}>
+          <View style={{ width: 250, flexDirection: "row" }}>
             <AppText
               style={{ fontSize: 30, fontStyle: "italic", fontWeight: "bold" }}
             >
-              Product Designer Meeting
+              {event!.title}
             </AppText>
+            <TouchableOpacity style={{ position: "absolute", left: "95%" }}>
+              <AppTag
+                iconType="check"
+                fontSize={25}
+                size={40}
+                title="Join"
+                style={{
+                  backgroundColor: Color.blue,
+                  borderRadius: 30,
+                }}
+              />
+            </TouchableOpacity>
           </View>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <AppIcon name="building-o" size={50} />
@@ -31,7 +74,7 @@ const EventDetailsScreen: React.FC<Props> = (props) => {
             </AppText>
           </View>
           <AppTagsList
-            categories={["Festival", "Musical", "Parties", "Meeting"]}
+            categories={event!.categories}
             style={{ backgroundColor: "#3EB489" }}
             fontSize={15}
             fontColor="white"
@@ -45,7 +88,7 @@ const EventDetailsScreen: React.FC<Props> = (props) => {
               The Date
             </AppText>
             <AppTag
-              title="03 Jun 2018"
+              title={moment(event!["holdOn"]).format("ddd, MMM D, YYYY")}
               iconType="calendar"
               style={{ backgroundColor: Color.blue }}
             />
@@ -57,7 +100,7 @@ const EventDetailsScreen: React.FC<Props> = (props) => {
               Location
             </AppText>
             <AppTag
-              title="1-3 galalhamd, Alex"
+              title={geoCodeLocation}
               iconType="location-arrow"
               style={{ backgroundColor: Color.blue }}
             ></AppTag>
@@ -68,7 +111,7 @@ const EventDetailsScreen: React.FC<Props> = (props) => {
             Description
           </AppText>
           <AppText style={{ color: Color.medium, flexWrap: "wrap" }}>
-            dsafhsafhkjashkjsafhakjsdnckjsacnkjsabcshakhskahkjhcsackjasbchcgaschjkasckjascnkajsbckjsgakshfsansjnasjkcasjcaskjhfsajgakhdlKADHJASBKHALJSFLKASNCASJCKJASFHLKANLAKNCJASKGFASHFLKASNCLSAKGKFHALshdalhlj
+            {event!.description}
           </AppText>
         </View>
       </View>

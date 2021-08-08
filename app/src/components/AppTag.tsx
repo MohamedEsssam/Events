@@ -10,6 +10,7 @@ export interface Props {
   style?: object;
   fontSize?: number;
   fontColor?: string;
+  size?: number;
 }
 
 const AppTag: React.FC<Props> = ({
@@ -18,10 +19,11 @@ const AppTag: React.FC<Props> = ({
   style,
   fontSize = 16,
   fontColor = "#fff",
+  size = 20,
 }) => {
   return (
     <View style={[styles.container, style]}>
-      {iconType && <AppIcon name={iconType} size={20} />}
+      {iconType && <AppIcon name={iconType} size={size} />}
       <AppText style={[styles.text, { fontSize, color: fontColor }]}>
         {title}
       </AppText>

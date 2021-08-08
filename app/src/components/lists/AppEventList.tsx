@@ -24,7 +24,7 @@ const AppEventList: React.FC<Props> = ({ items, onRefresh }) => {
           <AppListItem
             {...item}
             onPress={() => {
-              navigation.navigate("EventDetails");
+              navigation.navigate("EventDetails", item);
             }}
           />
         )}
