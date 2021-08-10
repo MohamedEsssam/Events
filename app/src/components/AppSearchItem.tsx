@@ -12,6 +12,7 @@ export interface Props {}
 const AppSearchItem: React.FC<Props> = (props) => {
   return (
     <View style={styles.container}>
+      <Image source={require("../../assets/logo.png")} style={styles.logo} />
       <View style={{ flexDirection: "row", padding: 30, top: "7%" }}>
         <AppText style={{ color: "white", fontSize: 35, fontWeight: "bold" }}>
           Find Event
@@ -26,8 +27,8 @@ const AppSearchItem: React.FC<Props> = (props) => {
         placeholder="Search Event"
         iconType="search"
         style={{
-          backgroundColor: "#C2D7D0",
-          opacity: 0.2,
+          backgroundColor: "#ffffff",
+          opacity: 0.5,
           marginLeft: 22,
           marginRight: 30,
         }}
@@ -50,6 +51,12 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
     marginLeft: 90,
+  },
+  logo: {
+    position: "absolute",
+    width: 120,
+    height: 100,
+    left: -40,
   },
 });
 
