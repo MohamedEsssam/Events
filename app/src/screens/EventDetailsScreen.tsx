@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Image,
-  Button,
-  TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import * as Location from "expo-location";
 import moment from "moment";
-
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 import { FeedNavigatorParams } from "../navigators/navigatorTypes/NavigatorTypes";
@@ -43,6 +36,15 @@ const EventDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
+      <View style={{ position: "absolute", top: 20, zIndex: 1 }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("EventListings");
+          }}
+        >
+          <AppIcon name="arrow-left" size={50} backgroundColor="transparent" />
+        </TouchableOpacity>
+      </View>
       <Image source={require("../../assets/resp3.jpeg")} style={styles.image} />
       <View style={styles.items}>
         <View>
