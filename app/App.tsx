@@ -6,14 +6,21 @@ import jwdDecode from "jwt-decode";
 import authStorage from "./src/auth/storage";
 import UserContext from "./src/auth/auth";
 
-import EventsListScreen from "./src/screens/EventsListScreen";
 import AppOfflineNotice from "./src/components/AppOfflineNotice";
-import EventDetailsScreen from "./src/screens/EventDetailsScreen";
 import FeedNavigator from "./src/navigators/FeedNavigator";
-import LoginForm from "./src/components/forms/LoginForm";
+import AuthNavigator from "./src/navigators/AuthNavigator";
 import { Color } from "./src/config/Color";
+import { useEffect } from "react";
 
 const App: React.FC = () => {
+  useEffect(() => {
+    const remove = async () => {
+      await authStorage.removeToken();
+      setUser(undefined);
+    };
+
+    remove();
+  });
   const [user, setUser] = useState();
   const [isReady, setIsReady] = useState(false);
 
@@ -36,11 +43,10 @@ const App: React.FC = () => {
   return (
     <>
       <UserContext.Provider value={{ user, setUser }}>
-        <LoginForm />
-        {/* <AppOfflineNotice />
-      <NavigationContainer>
-        <FeedNavigator />
-      </NavigationContainer> */}
+        <AppOfflineNotice />
+        <NavigationContainer>
+          {!user ? <AuthNavigator /> : <FeedNavigator />}
+        </NavigationContainer>
       </UserContext.Provider>
     </>
   );

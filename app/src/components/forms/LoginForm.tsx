@@ -17,7 +17,7 @@ export interface Props {}
 
 const service = new UserServices();
 const LoginForm: React.FC<Props> = (props) => {
-  const { setUser } = useAuth();
+  const { setUser, user } = useAuth();
   const [loginFailed, setLoginFailed] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
@@ -31,22 +31,18 @@ const LoginForm: React.FC<Props> = (props) => {
       return setLoginFailed(true);
     }
 
-    const user: User = jwdDecode(token as string);
-    if (user["verified"] === false) {
+    const loggedInUser: User = jwdDecode(token as string);
+    if (loggedInUser["verified"] === false) {
       setError("Verify your account.");
       return setLoginFailed(true);
     }
 
     setLoginFailed(false);
     authStorage.storeToken(token as string);
-    setUser(user);
+    setUser(loggedInUser);
   };
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../../../assets/logo.png")}
-        style={styles.image}
-      />
       <View style={{ top: "50%" }}>
         <FormContainer
           validationSchema={loginValidationSchema}
@@ -92,13 +88,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Color.blue,
-  },
-  image: {
-    position: "absolute",
-    width: 100,
-    height: 300,
-    left: "37%",
-    top: "10%",
   },
   input: {
     backgroundColor: Color.white,

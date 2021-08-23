@@ -8,7 +8,7 @@ export interface Props {
   title: string;
   style?: object;
   color?: string;
-  onPress: () => {};
+  onPress: any;
 }
 
 const AppButton: React.FC<Props> = ({

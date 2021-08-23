@@ -12,6 +12,7 @@ import AppTag from "../components/AppTag";
 import AppText from "../components/AppText";
 import AppTagsList from "../components/lists/AppTagsList";
 import { Color } from "../config/Color";
+import AppGoBack from "../components/AppGoBack";
 
 export interface Props {
   route: RouteProp<FeedNavigatorParams, "EventDetails">;
@@ -36,15 +37,12 @@ const EventDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <View style={{ position: "absolute", top: 20, zIndex: 1 }}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("EventListings");
-          }}
-        >
-          <AppIcon name="arrow-left" size={50} backgroundColor="transparent" />
-        </TouchableOpacity>
-      </View>
+      <AppGoBack
+        color={Color.black}
+        onPress={() => {
+          navigation.navigate("EventListings");
+        }}
+      />
       <Image source={require("../../assets/resp3.jpeg")} style={styles.image} />
       <View style={styles.items}>
         <View>
