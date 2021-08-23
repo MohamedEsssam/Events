@@ -19,6 +19,6 @@ export const login: RequestHandler = async (req, res) => {
       .status(200)
       .header("Authorization", user[1])
       .header("access-control-expose-headers", "Authorization")
-      .send(user[0]);
+      .send(user[1]);
   } catch (error) {}
 };

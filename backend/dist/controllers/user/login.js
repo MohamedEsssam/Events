@@ -62,7 +62,7 @@ var login = function (req, res) { return __awaiter(void 0, void 0, void 0, funct
                         .status(200)
                         .header("Authorization", user[1])
                         .header("access-control-expose-headers", "Authorization")
-                        .send(user[0])];
+                        .send(user[1])];
             case 3:
                 error_1 = _a.sent();
                 return [3 /*break*/, 4];

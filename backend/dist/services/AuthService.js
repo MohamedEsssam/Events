@@ -19,7 +19,7 @@ var AuthServices = /** @class */ (function () {
     function AuthServices() {
     }
     AuthServices.prototype.generateToken = function (user) {
-        var payload = __assign({}, pick(user, ["_id", "email"]));
+        var payload = __assign({}, pick(user, ["_id", "email", "verified"]));
         var token = jwt.sign(payload, config.get("authSecret"));
         return token;
     };

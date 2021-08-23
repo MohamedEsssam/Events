@@ -14,7 +14,13 @@ const FormErrorMessage: React.FC<Props> = ({ error, visible }) => {
 };
 
 const styles = StyleSheet.create({
-  error: { color: "red", paddingLeft: 15, fontSize: 15 },
+  error: {
+    color: "white",
+    paddingLeft: 40,
+    fontSize: 15,
+    fontWeight: "bold",
+    fontStyle: "italic",
+  },
 });
 
 export default FormErrorMessage;
