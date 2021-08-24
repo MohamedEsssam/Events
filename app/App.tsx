@@ -14,6 +14,8 @@ import { useEffect } from "react";
 import AppDatePicker from "./src/components/AppDatePicker";
 import DatePickerField from "./src/components/forms/DatePickerField";
 import RegisterForm from "./src/components/forms/RegisterForm";
+import RegisterScreen from "./src/screens/RegisterScreen";
+import LoginScreen from "./src/screens/LoginScreen";
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -45,13 +47,12 @@ const App: React.FC = () => {
 
   return (
     <>
-      <RegisterForm />
-      {/* <UserContext.Provider value={{ user, setUser }}>
+      <UserContext.Provider value={{ user, setUser }}>
         <AppOfflineNotice />
         <NavigationContainer>
           {!user ? <AuthNavigator /> : <FeedNavigator />}
         </NavigationContainer>
-      </UserContext.Provider> */}
+      </UserContext.Provider>
     </>
   );
 };

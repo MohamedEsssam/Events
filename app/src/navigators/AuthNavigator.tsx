@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import LoginScreen from "../screens/LoginScreen";
 import HomeScreen from "../screens/HomeScreen";
+import RegisterScreen from "../screens/RegisterScreen";
 
 const { Navigator, Screen } = createStackNavigator();
 const FeedNavigator = () => (
@@ -17,11 +18,11 @@ const FeedNavigator = () => (
       component={LoginScreen}
       options={{ headerShown: false }}
     />
-    {/* <Screen
+    <Screen
       name="Register"
       component={RegisterScreen}
       options={{ headerShown: false }}
-    /> */}
+    />
   </Navigator>
 );
 

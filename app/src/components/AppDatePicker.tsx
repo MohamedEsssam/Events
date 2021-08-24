@@ -37,7 +37,7 @@ const AppDatePicker: React.FC<Props> = ({ date, setDate, ...otherProps }) => {
         <AppButton
           onPress={show === true ? closeDatePicker : showDatePicker}
           title="Birthday"
-          color={Color.white}
+          color={Color.blue}
           icon={icon}
           style={styles.button}
         />
@@ -45,17 +45,32 @@ const AppDatePicker: React.FC<Props> = ({ date, setDate, ...otherProps }) => {
       <AppTag
         title={moment(date).format("ddd, MMM D, YYYY")}
         iconType="calendar"
-        style={{ backgroundColor: Color.blue, marginLeft: 10 }}
+        fontColor={Color.blue}
+        style={{ backgroundColor: Color.white, marginLeft: 10 }}
       />
       {show && (
-        <DateTimePicker
-          {...otherProps}
-          value={date}
-          mode={mode}
-          maximumDate={new Date()}
-          is24Hour
-          display="default"
-        />
+        <View
+          style={{
+            backgroundColor: Color.white,
+            width: "90%",
+            marginLeft: 10,
+            borderTopLeftRadius: 30,
+            borderBottomRightRadius: 30,
+            shadowColor: Color.white,
+            shadowOffset: { height: 3, width: 2 },
+            shadowOpacity: 0.7,
+            shadowRadius: 5,
+          }}
+        >
+          <DateTimePicker
+            {...otherProps}
+            value={date}
+            mode={mode}
+            maximumDate={new Date()}
+            is24Hour
+            display="default"
+          />
+        </View>
       )}
     </View>
   );
@@ -67,7 +82,7 @@ const styles = StyleSheet.create({
     margin: 10,
     marginTop: 30,
     width: "50%",
-    backgroundColor: Color.blue,
+    backgroundColor: Color.white,
     borderBottomLeftRadius: 10,
     borderTopRightRadius: 10,
     shadowColor: Color.white,
