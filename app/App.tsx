@@ -11,6 +11,9 @@ import FeedNavigator from "./src/navigators/FeedNavigator";
 import AuthNavigator from "./src/navigators/AuthNavigator";
 import { Color } from "./src/config/Color";
 import { useEffect } from "react";
+import AppDatePicker from "./src/components/AppDatePicker";
+import DatePickerField from "./src/components/forms/DatePickerField";
+import RegisterForm from "./src/components/forms/RegisterForm";
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -42,12 +45,13 @@ const App: React.FC = () => {
 
   return (
     <>
-      <UserContext.Provider value={{ user, setUser }}>
+      <RegisterForm />
+      {/* <UserContext.Provider value={{ user, setUser }}>
         <AppOfflineNotice />
         <NavigationContainer>
           {!user ? <AuthNavigator /> : <FeedNavigator />}
         </NavigationContainer>
-      </UserContext.Provider>
+      </UserContext.Provider> */}
     </>
   );
 };
