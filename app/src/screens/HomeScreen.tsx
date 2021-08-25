@@ -28,7 +28,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         <AppButton
           title="Register"
           onPress={() => {
-            navigation.navigate("Register");
+            navigation.navigate("ParticipantRegister");
           }}
           style={styles.button}
         />

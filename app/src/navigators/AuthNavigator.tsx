@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import LoginScreen from "../screens/LoginScreen";
 import HomeScreen from "../screens/HomeScreen";
-import RegisterScreen from "../screens/RegisterScreen";
+import ParticipantRegisterScreen from "../screens/ParticipantRegisterScreen";
 
 const { Navigator, Screen } = createStackNavigator();
 const FeedNavigator = () => (
@@ -19,8 +19,8 @@ const FeedNavigator = () => (
       options={{ headerShown: false }}
     />
     <Screen
-      name="Register"
-      component={RegisterScreen}
+      name="ParticipantRegister"
+      component={ParticipantRegisterScreen}
       options={{ headerShown: false }}
     />
   </Navigator>

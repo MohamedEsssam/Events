@@ -10,12 +10,12 @@ import { Keyboard } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import AppGoBack from "../components/AppGoBack";
-import RegisterForm from "../components/forms/RegisterForm";
+import ParticipantRegisterForm from "../components/forms/ParticipantRegisterForm";
 import { Color } from "../config/Color";
 
 export interface Props {}
 
-const RegisterScreen: React.FC<Props> = (props) => {
+const ParticipantRegisterScreen: React.FC<Props> = (props) => {
   const navigation = useNavigation();
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -33,7 +33,7 @@ const RegisterScreen: React.FC<Props> = (props) => {
         <View
           style={{ flex: 1, backgroundColor: Color.blue, paddingTop: "85%" }}
         >
-          <RegisterForm />
+          <ParticipantRegisterForm />
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RegisterScreen;
+export default ParticipantRegisterScreen;

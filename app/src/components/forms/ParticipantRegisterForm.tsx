@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { RegisterParticipantValidation } from "./Validation/RegisterParticipantValidationSchema";
+import { ParticipantServices } from "../../services/ParticipantServices";
+import Participant from "../../entities/Participant";
 
 import FormContainer from "./FormContainer";
 import FormErrorMessage from "./FormErrorMessage";
@@ -11,12 +14,32 @@ import { Color } from "../../config/Color";
 
 export interface Props {}
 
-const RegisterForm: React.FC<Props> = (props) => {
+const service = new ParticipantServices();
+const ParticipantRegisterForm: React.FC<Props> = (props) => {
+  const navigation = useNavigation();
   const [registerFailed, setRegisterFailed] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
+  const onSubmit = async (values: Participant, { restForm }: any) => {
+    const { data: participant, ok } = await service.register({
+      email: values["email"],
+      password: values["password"] as string,
+      firstName: values["firstName"],
+      lastName: values["lastName"],
+      birthDate: values["birthDate"],
+      verified: false,
+    });
+
+    if (!ok) {
+      setError("User already exist");
+      return setRegisterFailed(true);
+    }
+
+    setRegisterFailed(false);
+
+    navigation.navigate("Login");
+  };
   return (
-    // <View style={styles.container}>
     <ScrollView
       contentContainerStyle={{ flexGrow: 1 }}
       style={{ flex: 1 }}
@@ -30,9 +53,9 @@ const RegisterForm: React.FC<Props> = (props) => {
           lastName: "",
           password: "",
           confirmPassword: "",
-          birthday: "",
+          birthDate: null,
         }}
-        onSubmit={() => {}}
+        onSubmit={onSubmit}
       >
         <FormErrorMessage error={error} visible={registerFailed} />
         <>
@@ -96,12 +119,11 @@ const RegisterForm: React.FC<Props> = (props) => {
             autoCorrect={false}
             textContentType="password"
           />
-          <DatePickerField name="birthday" />
+          <DatePickerField name="birthDate" />
           <SubmitButton title="Register" style={styles.button} />
         </>
       </FormContainer>
     </ScrollView>
-    // </View>
   );
 };
 
@@ -134,4 +156,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RegisterForm;
+export default ParticipantRegisterForm;

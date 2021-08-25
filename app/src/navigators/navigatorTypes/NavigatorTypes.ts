@@ -7,5 +7,5 @@ export type FeedNavigatorParams = {
 export type AuthNavigatorParams = {
   Home: undefined;
   Login: undefined;
-  Register: undefined;
+  ParticipantRegister: undefined;
 };
