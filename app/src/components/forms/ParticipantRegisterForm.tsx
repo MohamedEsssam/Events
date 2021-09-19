@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactElement, useState } from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { RegisterParticipantValidation } from "./Validation/RegisterParticipantValidationSchema";
@@ -7,9 +7,11 @@ import Participant from "../../entities/Participant";
 
 import FormContainer from "./FormContainer";
 import FormErrorMessage from "./FormErrorMessage";
-import FormField from "./FormField";
-import DatePickerField from "./DatePickerField";
+import UserInfoPage0 from "./multi-step-form/UserInfoPage0";
+import UserInfoPage1 from "./multi-step-form/UserInfoPage1";
+import UserInfoPage2 from "./multi-step-form/UserInfoPage2";
 import SubmitButton from "./SubmitButton";
+import AppButton from "../AppButton";
 import { Color } from "../../config/Color";
 
 export interface Props {}
@@ -17,8 +19,17 @@ export interface Props {}
 const service = new ParticipantServices();
 const ParticipantRegisterForm: React.FC<Props> = (props) => {
   const navigation = useNavigation();
+  const pages: Array<ReactElement> = [
+    <UserInfoPage0 />,
+    <UserInfoPage1 />,
+    <UserInfoPage2 />,
+  ];
+  const [page, setPage] = useState<number>(0);
   const [registerFailed, setRegisterFailed] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+
+  const nextPage = () => setPage(page + 1);
+  const previousPage = () => setPage(page - 1);
 
   const onSubmit = async (values: Participant, { restForm }: any) => {
     const { data: participant, ok } = await service.register({
@@ -59,68 +70,19 @@ const ParticipantRegisterForm: React.FC<Props> = (props) => {
       >
         <FormErrorMessage error={error} visible={registerFailed} />
         <>
-          <FormField
-            name="email"
-            //@ts-ignore
-            iconType="envelope"
-            iconBackgroundColor={Color.blue}
-            iconColor={Color.white}
-            placeholder="Enter your email."
-            style={styles.input}
-            autoCapitalize="none"
-            autoCorrect={false}
-            textContentType="emailAddress"
-          />
-          <FormField
-            name="firstName"
-            //@ts-ignore
-            iconType="user-o"
-            iconBackgroundColor={Color.blue}
-            iconColor={Color.white}
-            placeholder="Enter your firstName."
-            style={styles.input}
-            autoCorrect={false}
-            textContentType="username"
-          />
-          <FormField
-            name="lastName"
-            //@ts-ignore
-            iconType="user-o"
-            iconBackgroundColor={Color.blue}
-            iconColor={Color.white}
-            placeholder="Enter your lastName."
-            style={styles.input}
-            autoCorrect={false}
-            textContentType="username"
-          />
-          <FormField
-            name="password"
-            //@ts-ignore
-            iconType="lock"
-            iconBackgroundColor={Color.blue}
-            iconColor={Color.white}
-            placeholder="Enter your password."
-            style={styles.input}
-            secureTextEntry={true}
-            autoCapitalize="none"
-            autoCorrect={false}
-            textContentType="password"
-          />
-          <FormField
-            name="confirmPassword"
-            //@ts-ignore
-            iconType="lock"
-            iconBackgroundColor={Color.blue}
-            iconColor={Color.white}
-            placeholder="Enter your confirm password."
-            style={styles.input}
-            secureTextEntry={true}
-            autoCapitalize="none"
-            autoCorrect={false}
-            textContentType="password"
-          />
-          <DatePickerField name="birthDate" />
-          <SubmitButton title="Register" style={styles.button} />
+          {pages[page]}
+          {page > 0 ? (
+            <AppButton
+              title="Previous"
+              onPress={previousPage}
+              style={styles.button}
+            />
+          ) : null}
+          {page === pages.length - 1 ? (
+            <SubmitButton title="Register" style={styles.button} />
+          ) : (
+            <AppButton title="Next" onPress={nextPage} style={styles.button} />
+          )}
         </>
       </FormContainer>
     </ScrollView>
@@ -145,7 +107,7 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 10,
-    marginTop: 30,
+    marginTop: 10,
     width: "95%",
     borderBottomLeftRadius: 10,
     borderTopRightRadius: 10,
