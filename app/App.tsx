@@ -15,6 +15,7 @@ import DatePickerField from "./src/components/forms/DatePickerField";
 import ParticipantRegisterForm from "./src/components/forms/ParticipantRegisterForm";
 import ParticipantRegisterScreen from "./src/screens/ParticipantRegisterScreen";
 import LoginScreen from "./src/screens/LoginScreen";
+import AppMap from "./src/components/map/AppMap";
 
 const App: React.FC = () => {
   // useEffect(() => {
@@ -47,6 +48,7 @@ const App: React.FC = () => {
 
   return (
     <>
+      {/* <AppMap /> */}
       <UserContext.Provider value={{ user, setUser }}>
         <AppOfflineNotice />
         <NavigationContainer>

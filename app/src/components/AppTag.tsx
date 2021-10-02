@@ -45,6 +45,8 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 5,
     fontSize: 2,
+    fontWeight: "bold",
+    fontStyle: "italic",
   },
 });
 
