@@ -16,6 +16,9 @@ import ParticipantRegisterForm from "./src/components/forms/ParticipantRegisterF
 import ParticipantRegisterScreen from "./src/screens/ParticipantRegisterScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import AppMap from "./src/components/map/AppMap";
+import AppImageInput from "./src/components/Image/AppImageInput";
+import ImagePickerField from "./src/components/forms/ImagePickerField";
+import EventForm from "./src/components/forms/EventForm";
 
 const App: React.FC = () => {
   // useEffect(() => {
@@ -49,12 +52,13 @@ const App: React.FC = () => {
   return (
     <>
       {/* <AppMap /> */}
-      <UserContext.Provider value={{ user, setUser }}>
+      <EventForm />
+      {/* <UserContext.Provider value={{ user, setUser }}>
         <AppOfflineNotice />
         <NavigationContainer>
           {!user ? <AuthNavigator /> : <FeedNavigator />}
         </NavigationContainer>
-      </UserContext.Provider>
+      </UserContext.Provider> */}
     </>
   );
 };
