@@ -35,6 +35,8 @@
 
 * `10 Screens` - Home, Register, Login, ParticipantAccount, OrganizationAccount, Event Listings, Event Details, Event Edit, OrganizationEvents, Origanization List Screens.
 
+* `MapViewer` - Using mapview-ios.
+
 * `Animation` - Using Lottie (Activity Indicator, done animation and more).
 
 * `Authentication` - User authentication (Register, Login/out) using `Jwt`.
@@ -53,6 +55,6 @@
 
 * `Navigation` - Using React Navigation and Stack Navigator.
 
-* `Reusable Components` - Button, Icon, Forms, Screen, Text, Text Input and more.
+* `Reusable Components` - Button, Icon, Forms, Map, Screen, Text, Text Input and more.
 
 * `Splash Screen` - Logo Screen Design while the app is launching.
