@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, StyleSheet, TouchableOpacity, Image, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 import { Color } from "../../config/Color";
 
 export interface Props {
@@ -11,7 +12,6 @@ export interface Props {
 }
 
 const AppImageInput: React.FC<Props> = ({ imgUri, addImage, removeImage }) => {
-  //   const [imageUri, serImageUri] = useState<any>(null);
   const requestPermission = async () => {
     const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!granted)

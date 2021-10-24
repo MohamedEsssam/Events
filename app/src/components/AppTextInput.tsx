@@ -8,6 +8,7 @@ export interface Props {
   iconColor?: string;
   iconBackgroundColor?: string;
   placeholder: string;
+  clearButtonMode?: string;
   style?: {};
 }
 
@@ -17,6 +18,7 @@ const AppTextInput: React.FC<Props> = ({
   iconColor,
   iconBackgroundColor,
   placeholder,
+  clearButtonMode,
   style,
   ...otherProps
 }) => {
@@ -31,7 +33,7 @@ const AppTextInput: React.FC<Props> = ({
       <TextInput
         style={styles.input}
         placeholder={placeholder}
-        clearButtonMode="always"
+        clearButtonMode={clearButtonMode ? "never" : "always"}
         {...otherProps}
       />
     </View>
