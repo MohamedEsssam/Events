@@ -6,11 +6,12 @@ import AppModal from "./AppModal";
 import AppIcon from "./AppIcon";
 import AppTextInput from "./AppTextInput";
 import { Color } from "../config/Color";
+import AppText from "./AppText";
 
 export interface Props {
   placeholder: string;
   selectedItem: string;
-  handleSelectItem: (item: string) => void;
+  handleSelectItem: (items: Array<string>) => void;
 }
 
 const AppPicker: React.FC<Props> = ({
@@ -34,13 +35,7 @@ const AppPicker: React.FC<Props> = ({
       <TouchableOpacity onPress={() => setShowModal(true)}>
         <View style={styles.container}>
           <Ionicons name="apps" size={24} color={Color.blue} />
-          <AppTextInput
-            style={styles.textInput}
-            //@ts-ignore
-            defaultValue={selectedItem ? selectedItem : placeholder}
-            clearButtonMode="never"
-            editable={false}
-          />
+          <AppText style={styles.textInput}>{placeholder}</AppText>
           <AppIcon
             name="chevron-down"
             color={Color.blue}
@@ -79,7 +74,8 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 18,
-    marginLeft: 10,
+    fontWeight: "bold",
+    marginLeft: 90,
     flex: 1,
   },
 });

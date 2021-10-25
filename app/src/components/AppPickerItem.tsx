@@ -6,13 +6,19 @@ import { Color } from "../config/Color";
 
 export interface Props {
   label: string;
+  items: Array<string>;
   onPress: () => void;
 }
 
-const AppPickerItem: React.FC<Props> = ({ label, onPress }) => {
+const AppPickerItem: React.FC<Props> = ({ label, items, onPress }) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          items.includes(label) ? { backgroundColor: Color.blue } : {},
+        ]}
+      >
         <AppText>{label}</AppText>
       </View>
     </TouchableOpacity>

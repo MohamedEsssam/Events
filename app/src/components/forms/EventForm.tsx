@@ -1,7 +1,6 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import * as Yup from "yup";
-import { object } from "yup/lib/locale";
 import { Color } from "../../config/Color";
 import AppText from "../AppText";
 import DatePickerField from "./DatePickerField";
@@ -11,22 +10,27 @@ import FormField from "./FormField";
 import ImagePickerField from "./ImagePickerField";
 import MapField from "./MapField";
 import PickerField from "./PickerField";
+import SubmitButton from "./SubmitButton";
 
 export interface Props {}
 
 const EventForm: React.FC<Props> = (props) => {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <FormContainer
         validationSchema={Yup.object().shape({})}
         initialValues={{
           image: null,
-          categories: "",
           title: "",
           description: "",
+          holdOn: null,
+          endIn: null,
+          categories: [],
           location: { latitude: 31.214349, longitude: 29.94576 },
         }}
-        onSubmit={() => {}}
+        onSubmit={(values: any) => {
+          console.log(values["categories"]);
+        }}
       >
         <ImagePickerField name="image" />
         <FormField
@@ -84,7 +88,7 @@ const EventForm: React.FC<Props> = (props) => {
           >
             Event Ends in
           </AppText>
-          <DatePickerField name="holdOn" />
+          <DatePickerField name="endIn" />
         </View>
         <PickerField name="categories" placeholder="Categories" />
         <View
@@ -104,8 +108,13 @@ const EventForm: React.FC<Props> = (props) => {
           </AppText>
           <MapField name="location" />
         </View>
+        <SubmitButton
+          title="Create"
+          style={styles.button}
+          color={Color.white}
+        />
       </FormContainer>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -123,6 +132,19 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     borderBottomLeftRadius: 10,
     borderTopRightRadius: 10,
+  },
+  button: {
+    margin: 10,
+    marginTop: 30,
+    marginBottom: 30,
+    backgroundColor: Color.blue,
+    width: "95%",
+    borderBottomLeftRadius: 10,
+    borderTopRightRadius: 10,
+    shadowColor: Color.blue,
+    shadowOffset: { height: 3, width: 2 },
+    shadowOpacity: 0.7,
+    shadowRadius: 5,
   },
 });
 

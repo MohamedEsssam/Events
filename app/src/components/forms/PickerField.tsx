@@ -17,8 +17,8 @@ const PickerField: React.FC<Props> = ({ name, placeholder }) => {
       <AppPicker
         placeholder={placeholder}
         selectedItem={values[name]}
-        handleSelectItem={(item: string) => {
-          setFieldValue(name, item);
+        handleSelectItem={(items: Array<string>) => {
+          setFieldValue(name, items);
         }}
       />
       <FormErrorMessage error={errors[name]} visible={touched[name]} />
