@@ -11,6 +11,7 @@ interface Event_ {
   owner: string;
   participants?: string[];
   onPress?: any;
+  image?: any;
 }
 
 export default Event_;

@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import Toast from "react-native-toast-message";
 import Event from "../../entities/Event";
 import { EventServices } from "../../services/EventServices";
+import { MediaServices } from "../../services/MediaService";
 
 import FormContainer from "./FormContainer";
 import FormField from "./FormField";
@@ -18,20 +19,46 @@ import { Color } from "../../config/Color";
 export interface Props {}
 
 const service = new EventServices();
+const mediaService = new MediaServices();
 const EventForm: React.FC<Props> = (props) => {
   const onSubmit = async (values: Event) => {
     values.owner = "60ed8bfcd5c1371b5b2c035d";
-    const { data: event, ok } = await service.create(values);
+    const {
+      data: event,
+      ok: eventSaved,
+      status,
+    } = await service.create(values);
 
-    if (!ok)
+    if (status === 400)
       return Toast.show({
-        type: "error",
+        type: "info",
         text1: "Error",
-        text2: "There is something goes wrong, we will fix it soon",
+        text2: "You must enter a valid data.",
         position: "top",
       });
 
-    console.log(event);
+    if (!eventSaved)
+      return Toast.show({
+        type: "error",
+        text1: "Error",
+        text2: "There is something goes wrong, we will fix it soon.",
+        position: "top",
+      });
+
+    const { ok: imageSaved } = await mediaService.addEventImage(
+      event?._id as string,
+      values["image"]["base64"]
+    );
+    if (!imageSaved)
+      return Toast.show({
+        type: "error",
+        text1: "Error",
+        text2:
+          "There is something goes wrong while saving image, we will fix it soon",
+        position: "top",
+      });
+
+    // console.log(event);
   };
   return (
     <ScrollView style={styles.container}>
