@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
 
@@ -33,51 +33,45 @@ const AppDatePicker: React.FC<Props> = ({ date, setDate, ...otherProps }) => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <AppButton
-          onPress={show === true ? closeDatePicker : showDatePicker}
-          title="Birthday"
-          color={Color.blue}
-          icon={icon}
-          style={styles.button}
+      <TouchableOpacity
+        onPress={show === true ? closeDatePicker : showDatePicker}
+      >
+        <AppTag
+          title={moment(date).format("ddd, MMM D, YYYY")}
+          iconType="calendar"
+          fontColor={Color.blue}
+          style={{ backgroundColor: Color.white, marginLeft: 10 }}
         />
-      </View>
-      <AppTag
-        title={moment(date).format("ddd, MMM D, YYYY")}
-        iconType="calendar"
-        fontColor={Color.blue}
-        style={{ backgroundColor: Color.white, marginLeft: 10 }}
-      />
+      </TouchableOpacity>
       {show && (
-        <View
-          style={{
-            backgroundColor: Color.white,
-            width: "90%",
-            marginLeft: 10,
-            borderTopLeftRadius: 30,
-            borderBottomRightRadius: 30,
-            shadowColor: Color.white,
-            shadowOffset: { height: 3, width: 2 },
-            shadowOpacity: 0.7,
-            shadowRadius: 5,
-          }}
-        >
+        <>
           <DateTimePicker
+            style={{ margin: 5, marginLeft: 40 }}
             {...otherProps}
             value={date}
             mode={mode}
             maximumDate={new Date()}
-            is24Hour
             display="default"
           />
-        </View>
+        </>
       )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    width: "53%",
+    backgroundColor: Color.white,
+    marginBottom: 10,
+    marginLeft: 10,
+    borderTopLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    shadowColor: Color.light,
+    shadowOffset: { height: 3, width: 2 },
+    shadowOpacity: 0.7,
+    shadowRadius: 5,
+  },
   button: {
     margin: 10,
     marginTop: 30,

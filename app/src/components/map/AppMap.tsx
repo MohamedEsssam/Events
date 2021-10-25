@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
-export interface Props {}
+type Location = {
+  latitude: number;
+  longitude: number;
+};
+export interface Props {
+  coordination: Location;
+  setCoordination: (location: Location) => void;
+}
 
-const AppMap: React.FC<Props> = (props) => {
-  const [coordination, setCoordination] = useState<{
-    latitude: number;
-    longitude: number;
-  }>({ latitude: 31.2885, longitude: 30.016 });
+const AppMap: React.FC<Props> = ({ coordination, setCoordination }) => {
   const [color, setColor] = useState<string>("red");
   const colors: Array<string> = ["red", "blue", "green", "gold"];
 
@@ -26,8 +29,8 @@ const AppMap: React.FC<Props> = (props) => {
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: 31.2885,
-          longitude: 30.016,
+          latitude: coordination["latitude"],
+          longitude: coordination["longitude"],
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
@@ -46,14 +49,14 @@ const AppMap: React.FC<Props> = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    padding: 5,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
   map: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    width: "100%",
+    height: 300,
   },
 });
 
