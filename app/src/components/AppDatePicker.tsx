@@ -10,9 +10,15 @@ import AppTag from "./AppTag";
 export interface Props {
   date: Date;
   setDate: any;
+  isBirthday?: boolean;
 }
 
-const AppDatePicker: React.FC<Props> = ({ date, setDate, ...otherProps }) => {
+const AppDatePicker: React.FC<Props> = ({
+  date,
+  setDate,
+  isBirthday = true,
+  ...otherProps
+}) => {
   const [mode, setMode] = useState<any>("date");
   const [show, setShow] = useState<boolean>(false);
   const [icon, setIcon] = useState<string>("arrow-down");
@@ -45,14 +51,25 @@ const AppDatePicker: React.FC<Props> = ({ date, setDate, ...otherProps }) => {
       </TouchableOpacity>
       {show && (
         <>
-          <DateTimePicker
-            style={{ margin: 5, marginLeft: 40 }}
-            {...otherProps}
-            value={date}
-            mode={mode}
-            maximumDate={new Date()}
-            display="default"
-          />
+          {isBirthday ? (
+            <DateTimePicker
+              style={{ margin: 5, marginLeft: 40 }}
+              {...otherProps}
+              value={date}
+              mode={mode}
+              maximumDate={new Date()}
+              display="default"
+            />
+          ) : (
+            <DateTimePicker
+              style={{ margin: 5, marginLeft: 40 }}
+              {...otherProps}
+              value={date}
+              mode={mode}
+              minimumDate={new Date()}
+              display="default"
+            />
+          )}
         </>
       )}
     </View>

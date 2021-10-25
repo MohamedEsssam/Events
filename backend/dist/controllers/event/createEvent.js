@@ -53,6 +53,10 @@ var createEvent = function (req, res) { return __awaiter(void 0, void 0, void 0,
         switch (_a.label) {
             case 0:
                 request = req.body;
+                request.location = {
+                    lat: req.body.location["latitude"],
+                    lng: req.body.location["longitude"],
+                };
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);

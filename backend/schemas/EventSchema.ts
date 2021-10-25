@@ -5,6 +5,7 @@ export function validateEventSchema<T extends Event>(
   event: T
 ): ValidationResult {
   const schema = Joi.object({
+    image: Joi.object(),
     title: Joi.string().required(),
     description: Joi.string().required(),
     ticketPrice: Joi.number().required(),

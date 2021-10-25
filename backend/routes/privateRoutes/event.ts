@@ -8,7 +8,7 @@ import { authJwt } from "../../middlewares/authJwt";
 
 const router: Router = Router();
 
-router.post("/", authJwt, createEvent);
+router.post("/", createEvent);
 router.put("/:id", authJwt, updateEvent);
 router.delete("/:id", authJwt, deleteEvent);
 router.get("/:id", authJwt, getEvent);

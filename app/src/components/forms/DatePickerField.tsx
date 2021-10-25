@@ -8,9 +8,14 @@ import FormErrorMessage from "./FormErrorMessage";
 
 export interface Props {
   name: string;
+  isBirthday: boolean;
 }
 
-const DatePickerField: React.FC<Props> = ({ name, ...otherProps }) => {
+const DatePickerField: React.FC<Props> = ({
+  name,
+  isBirthday,
+  ...otherProps
+}) => {
   const [date, setDate] = useState<Date>(new Date());
   const { touched, errors, setFieldTouched, setFieldValue, values } =
     useFormikContext();
@@ -30,6 +35,7 @@ const DatePickerField: React.FC<Props> = ({ name, ...otherProps }) => {
         value={values[name]}
         date={date}
         setDate={setDate}
+        isBirthday={isBirthday}
       />
       <FormErrorMessage error={errors[name]} visible={touched[name]} />
     </>

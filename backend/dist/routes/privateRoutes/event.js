@@ -8,7 +8,7 @@ var getEvents_1 = require("../../controllers/event/getEvents");
 var updateEvent_1 = require("../../controllers/event/updateEvent");
 var authJwt_1 = require("../../middlewares/authJwt");
 var router = express_1.Router();
-router.post("/", authJwt_1.authJwt, createEvent_1.createEvent);
+router.post("/", createEvent_1.createEvent);
 router.put("/:id", authJwt_1.authJwt, updateEvent_1.updateEvent);
 router.delete("/:id", authJwt_1.authJwt, deleteEvent_1.deleteEvent);
 router.get("/:id", authJwt_1.authJwt, getEvent_1.getEvent);

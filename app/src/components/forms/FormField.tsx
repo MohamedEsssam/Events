@@ -19,7 +19,7 @@ const FormField: React.FC<Props> = ({ name, ...otherProps }) => {
         {...otherProps}
         onBlur={() => setFieldTouched(name)}
         onChangeText={(text: string) => setFieldValue(name, text)}
-        value={values[name]}
+        value={values[name].toString()}
       />
       <FormErrorMessage error={errors[name]} visible={touched[name]} />
     </>

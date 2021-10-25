@@ -7,6 +7,7 @@ exports.validateEventSchema = void 0;
 var joi_1 = __importDefault(require("@hapi/joi"));
 function validateEventSchema(event) {
     var schema = joi_1.default.object({
+        image: joi_1.default.object(),
         title: joi_1.default.string().required(),
         description: joi_1.default.string().required(),
         ticketPrice: joi_1.default.number().required(),

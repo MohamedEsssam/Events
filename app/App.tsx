@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import AppLoading from "expo-app-loading";
 import { NavigationContainer } from "@react-navigation/native";
 import jwdDecode from "jwt-decode";
+import Toast from "react-native-toast-message";
 import authStorage from "./src/auth/storage";
 import UserContext from "./src/auth/auth";
 
@@ -19,6 +20,7 @@ import AppMap from "./src/components/map/AppMap";
 import AppImageInput from "./src/components/Image/AppImageInput";
 import ImagePickerField from "./src/components/forms/ImagePickerField";
 import EventForm from "./src/components/forms/EventForm";
+import EventFormScreen from "./src/screens/EventFormScreen";
 
 const App: React.FC = () => {
   // useEffect(() => {
@@ -51,8 +53,12 @@ const App: React.FC = () => {
 
   return (
     <>
+      <Toast
+        ref={(ref) => Toast.setRef(ref)}
+        style={{ zIndex: 1, paddingTop: 10 }}
+      />
       {/* <AppMap /> */}
-      <EventForm />
+      <EventFormScreen />
       {/* <UserContext.Provider value={{ user, setUser }}>
         <AppOfflineNotice />
         <NavigationContainer>

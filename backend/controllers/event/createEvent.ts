@@ -10,6 +10,11 @@ const repository: EventRepository = new EventRepository(EventModel);
 const io = new SocketIo();
 export const createEvent: RequestHandler = async (req, res) => {
   const request: Event = req.body;
+  request.location = {
+    lat: req.body.location["latitude"],
+    lng: req.body.location["longitude"],
+  };
+
   try {
     const event: Event | null = await repository.create(request);
 
@@ -17,7 +22,7 @@ export const createEvent: RequestHandler = async (req, res) => {
 
     io.getIo().emit("event", { action: "create", event: event });
     return res.status(200).send(event);
-  } catch (error) {
+  } catch (error: any) {
     if (error.message === "You entered invalid data.")
       return res.status(BadRequest.httpCode).send(BadRequest);
     else return res.status(InternalServer.httpCode).send(InternalServer);

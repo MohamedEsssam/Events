@@ -1,20 +1,38 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import * as Yup from "yup";
-import { Color } from "../../config/Color";
-import AppText from "../AppText";
-import DatePickerField from "./DatePickerField";
+import Toast from "react-native-toast-message";
+import Event from "../../entities/Event";
+import { EventServices } from "../../services/EventServices";
 
 import FormContainer from "./FormContainer";
 import FormField from "./FormField";
 import ImagePickerField from "./ImagePickerField";
-import MapField from "./MapField";
+import DatePickerField from "./DatePickerField";
 import PickerField from "./PickerField";
+import MapField from "./MapField";
+import AppText from "../AppText";
 import SubmitButton from "./SubmitButton";
+import { Color } from "../../config/Color";
 
 export interface Props {}
 
+const service = new EventServices();
 const EventForm: React.FC<Props> = (props) => {
+  const onSubmit = async (values: Event) => {
+    values.owner = "60ed8bfcd5c1371b5b2c035d";
+    const { data: event, ok } = await service.create(values);
+
+    if (!ok)
+      return Toast.show({
+        type: "error",
+        text1: "Error",
+        text2: "There is something goes wrong, we will fix it soon",
+        position: "top",
+      });
+
+    console.log(event);
+  };
   return (
     <ScrollView style={styles.container}>
       <FormContainer
@@ -23,14 +41,13 @@ const EventForm: React.FC<Props> = (props) => {
           image: null,
           title: "",
           description: "",
+          ticketPrice: "",
           holdOn: null,
           endIn: null,
           categories: [],
           location: { latitude: 31.214349, longitude: 29.94576 },
         }}
-        onSubmit={(values: any) => {
-          console.log(values["categories"]);
-        }}
+        onSubmit={onSubmit}
       >
         <ImagePickerField name="image" />
         <FormField
@@ -39,7 +56,7 @@ const EventForm: React.FC<Props> = (props) => {
           // iconType="format-title"
           iconBackgroundColor={Color.blue}
           iconColor={Color.white}
-          placeholder="Enter event title."
+          placeholder="Enter The Event Title."
           style={styles.input}
           autoCorrect={false}
         />
@@ -49,11 +66,24 @@ const EventForm: React.FC<Props> = (props) => {
           // iconType="format-title"
           iconBackgroundColor={Color.blue}
           iconColor={Color.white}
-          placeholder="Enter event description."
+          placeholder="Enter The Event Description."
           style={styles.input}
           autoCorrect={false}
           multiline
         />
+        <View style={{ width: "60%" }}>
+          <FormField
+            name="ticketPrice"
+            //@ts-ignore
+            iconType="dollar"
+            iconBackgroundColor={Color.blue}
+            iconColor={Color.white}
+            placeholder="Ticket Price."
+            style={styles.input}
+            autoCorrect={false}
+            keyboardType="numeric"
+          />
+        </View>
         <View
           style={{
             flexDirection: "row",
@@ -70,7 +100,7 @@ const EventForm: React.FC<Props> = (props) => {
           >
             Event Holds On
           </AppText>
-          <DatePickerField name="holdOn" />
+          <DatePickerField name="holdOn" isBirthday={false} />
         </View>
         <View
           style={{
@@ -88,7 +118,7 @@ const EventForm: React.FC<Props> = (props) => {
           >
             Event Ends in
           </AppText>
-          <DatePickerField name="endIn" />
+          <DatePickerField name="endIn" isBirthday={false} />
         </View>
         <PickerField name="categories" placeholder="Categories" />
         <View
