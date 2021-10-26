@@ -1,6 +1,7 @@
 import React from "react";
 import Constants from "expo-constants";
 import { SafeAreaView, StyleSheet } from "react-native";
+import { Color } from "../config/Color";
 
 export interface Props {}
 
@@ -10,6 +11,7 @@ const AppScreen: React.FC<Props> = ({ children }) => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: Color.white,
     paddingTop: Constants.statusBarHeight,
     flex: 1,
   },

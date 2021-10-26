@@ -76,7 +76,9 @@ const EventForm: React.FC<Props> = (props) => {
         }}
         onSubmit={onSubmit}
       >
-        <ImagePickerField name="image" />
+        <View style={{ paddingLeft: 10 }}>
+          <ImagePickerField name="image" />
+        </View>
         <FormField
           name="title"
           //@ts-ignore
@@ -177,6 +179,7 @@ const EventForm: React.FC<Props> = (props) => {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 10,
     flex: 1,
   },
   input: {

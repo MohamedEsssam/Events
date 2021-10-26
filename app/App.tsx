@@ -21,6 +21,7 @@ import AppImageInput from "./src/components/Image/AppImageInput";
 import ImagePickerField from "./src/components/forms/ImagePickerField";
 import EventForm from "./src/components/forms/EventForm";
 import EventFormScreen from "./src/screens/EventFormScreen";
+import AppNavigator from "./src/navigators/AppNavigator";
 
 const App: React.FC = () => {
   // useEffect(() => {
@@ -57,14 +58,12 @@ const App: React.FC = () => {
         ref={(ref) => Toast.setRef(ref)}
         style={{ zIndex: 1, paddingTop: 10 }}
       />
-      {/* <AppMap /> */}
-      <EventFormScreen />
-      {/* <UserContext.Provider value={{ user, setUser }}>
+      <UserContext.Provider value={{ user, setUser }}>
         <AppOfflineNotice />
         <NavigationContainer>
-          {!user ? <AuthNavigator /> : <FeedNavigator />}
+          {!user ? <AuthNavigator /> : <AppNavigator />}
         </NavigationContainer>
-      </UserContext.Provider> */}
+      </UserContext.Provider>
     </>
   );
 };
