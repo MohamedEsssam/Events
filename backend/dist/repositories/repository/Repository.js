@@ -96,7 +96,9 @@ var Repository = /** @class */ (function () {
             var items;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.model.find(item ? item : {})];
+                    case 0: return [4 /*yield*/, this.model
+                            .find(item ? item : {})
+                            .sort({ holdOn: "desc" })];
                     case 1:
                         items = _a.sent();
                         return [2 /*return*/, items];

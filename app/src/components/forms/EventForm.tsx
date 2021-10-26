@@ -15,14 +15,20 @@ import MapField from "./MapField";
 import AppText from "../AppText";
 import SubmitButton from "./SubmitButton";
 import { Color } from "../../config/Color";
+import { useNavigation } from "@react-navigation/native";
+import { useAuth } from "../../auth/auth";
 
 export interface Props {}
 
 const service = new EventServices();
 const mediaService = new MediaServices();
 const EventForm: React.FC<Props> = (props) => {
+  const navigation = useNavigation();
+  const { user } = useAuth();
   const onSubmit = async (values: Event) => {
-    values.owner = "60ed8bfcd5c1371b5b2c035d";
+    values.owner = user._id;
+    console.log(user._id, user);
+
     const {
       data: event,
       ok: eventSaved,
@@ -58,7 +64,7 @@ const EventForm: React.FC<Props> = (props) => {
         position: "top",
       });
 
-    // console.log(event);
+    navigation.navigate("Feed");
   };
   return (
     <ScrollView style={styles.container}>

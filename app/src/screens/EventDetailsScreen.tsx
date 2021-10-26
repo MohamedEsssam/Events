@@ -206,7 +206,7 @@ const EventDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
                         color: Color.medium,
                       }}
                     >
-                      {moment(event!["holdOn"]).format("ddd, MMM D, YYYY")}
+                      {moment(event!["endIn"]).format("ddd, MMM D, YYYY")}
                     </AppText>
                   </View>
                 </View>

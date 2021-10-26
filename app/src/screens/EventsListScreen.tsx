@@ -39,7 +39,7 @@ const EventsListScreen: React.FC<Props> = React.memo(({ navigation }) => {
       setFetchedEvents(items);
       setFetched(true);
       setLoading(false);
-    }, 3000);
+    }, 2000);
   };
   return (
     <View style={styles.container}>
