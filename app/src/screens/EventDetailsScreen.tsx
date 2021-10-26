@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  LogBox,
 } from "react-native";
 import * as Location from "expo-location";
 import moment from "moment";
@@ -29,6 +30,7 @@ export interface Props {
 }
 
 const EventDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
+  LogBox.ignoreAllLogs();
   const event: Event | undefined = route["params"];
   const [geoCodeLocation, setGeoCodeLocation] = useState<string>("");
   useEffect(() => {
@@ -44,10 +46,9 @@ const EventDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
     setGeoCodeLocation(
       (locationObject[0].name +
         ", " +
-        locationObject[0].district +
-        ", " +
         locationObject[0].region +
-        " ") as string
+        ", " +
+        locationObject[0].isoCountryCode) as string
     );
   };
 
@@ -59,7 +60,12 @@ const EventDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
           navigation.navigate("EventListings");
         }}
       />
-      <Image source={require("../../assets/resp3.jpeg")} style={styles.image} />
+      <Image
+        source={{
+          uri: `http://192.168.1.14:9000/eventImage-${event!._id}`,
+        }}
+        style={styles.image}
+      />
       <View style={styles.items}>
         <TouchableOpacity
           style={{ position: "relative", left: "20%", bottom: 40 }}
@@ -82,7 +88,7 @@ const EventDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
           style={{ height: 200, bottom: 30 }}
         >
           <View>
-            <View style={{ width: 250, flexDirection: "row" }}>
+            <View style={{ width: 240, flexDirection: "row" }}>
               <AppText
                 style={{
                   fontSize: 25,
@@ -110,12 +116,13 @@ const EventDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
                   alignItems: "center",
                 }}
               >
-                <AppIcon name="location-arrow" />
+                <AppIcon name="location-arrow" color={Color.medium} />
                 <AppText
                   style={{
                     fontSize: 14,
                     fontStyle: "italic",
                     fontWeight: "bold",
+                    color: Color.medium,
                   }}
                 >
                   {geoCodeLocation}
@@ -129,35 +136,79 @@ const EventDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
                     alignItems: "center",
                   }}
                 >
-                  <AppIcon name="clock-o" />
+                  <AppIcon name="clock-o" color={Color.medium} />
                   <AppText
                     style={{
                       fontSize: 14,
                       fontStyle: "italic",
                       fontWeight: "bold",
+                      color: Color.medium,
                     }}
                   >
                     07:30 Pm
                   </AppText>
                 </View>
-                <View
-                  style={{
-                    left: "35%",
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <AppIcon name="calendar" />
-                  <AppText
+                <View style={{ flexDirection: "column" }}>
+                  <View
                     style={{
-                      fontSize: 14,
-                      fontStyle: "italic",
-                      fontWeight: "bold",
+                      left: "90%",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
                     }}
                   >
-                    {moment(event!["holdOn"]).format("ddd, MMM D, YYYY")}
-                  </AppText>
+                    <AppText
+                      style={{
+                        fontSize: 14,
+                        fontStyle: "italic",
+                        fontWeight: "bold",
+                        color: Color.medium,
+                      }}
+                    >
+                      Hold on
+                    </AppText>
+                    <AppIcon name="calendar" color={Color.medium} />
+                    <AppText
+                      style={{
+                        fontSize: 14,
+                        fontStyle: "italic",
+                        fontWeight: "bold",
+                        color: Color.medium,
+                      }}
+                    >
+                      {moment(event!["holdOn"]).format("ddd, MMM D, YYYY")}
+                    </AppText>
+                  </View>
+                  <View
+                    style={{
+                      left: "90%",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <AppText
+                      style={{
+                        fontSize: 14,
+                        fontStyle: "italic",
+                        fontWeight: "bold",
+                        color: Color.medium,
+                      }}
+                    >
+                      End in
+                    </AppText>
+                    <AppIcon name="calendar" color={Color.medium} />
+                    <AppText
+                      style={{
+                        fontSize: 14,
+                        fontStyle: "italic",
+                        fontWeight: "bold",
+                        color: Color.medium,
+                      }}
+                    >
+                      {moment(event!["holdOn"]).format("ddd, MMM D, YYYY")}
+                    </AppText>
+                  </View>
                 </View>
               </View>
             </View>
@@ -175,11 +226,7 @@ const EventDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
             <AppText style={{ fontStyle: "italic", fontWeight: "bold" }}>
               Description
             </AppText>
-            <AppShowMoreText
-              targetLines={2}
-              text="sadfasfsanfjasfkjadnaskdn
-              dsafjnsajkfakjfbsakj sdasjfbajksnadsj sdafbasdnjsanfjksadajnajkcnajskfbasdnacnjkabsd dasjkfbafnajscnasjfbaj"
-            />
+            <AppShowMoreText targetLines={2} text={event!.description} />
             {/* <AppText style={{ color: Color.medium, flexWrap: "wrap" }}> */}
             {/* {event!.description} */}
             {/* </AppText> */}

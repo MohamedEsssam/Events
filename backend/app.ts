@@ -21,6 +21,13 @@ const server: Server = app.listen(9000, () => {
 });
 const socketIo: SocketIo = new SocketIo();
 
+app.use(
+  express.static("./dist/public", {
+    index: false,
+    extensions: ["png", "jpg", "jpeg", "mp4", "avi", "3gp"],
+  })
+);
+
 require("./startup/config")();
 require("./startup/cors")(app);
 require("./startup/swagger")(app);

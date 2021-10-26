@@ -10,6 +10,7 @@ import { Color } from "../config/Color";
 import Event from "../entities/Event";
 
 const AppListItem: React.FC<Event> = ({
+  _id,
   title,
   categories,
   holdOn,
@@ -31,11 +32,7 @@ const AppListItem: React.FC<Event> = ({
     setGeoCodeLocation(
       locationObject[0].name +
         ", " +
-        locationObject[0].district +
-        ", " +
         locationObject[0].region +
-        " " +
-        locationObject[0].postalCode +
         ", " +
         locationObject[0].isoCountryCode
     );
@@ -77,7 +74,9 @@ const AppListItem: React.FC<Event> = ({
           </View>
         </View>
         <Image
-          source={require("../../assets/resp3.jpeg")}
+          source={{
+            uri: `http://192.168.1.14:9000/eventImage-${_id}`,
+          }}
           style={styles.image}
         />
       </View>
@@ -106,8 +105,8 @@ const styles = StyleSheet.create({
     width: 120,
     height: 140,
     borderRadius: 20,
-    marginTop: 15,
-    right: 5,
+    marginTop: 5,
+    right: -3,
   },
 });
 

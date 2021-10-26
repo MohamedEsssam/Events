@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import openSocket, { Socket } from "socket.io-client";
 import { ApiResponse } from "apisauce";
@@ -18,6 +18,7 @@ export interface Props {
 const service = new EventServices();
 
 const EventsListScreen: React.FC<Props> = React.memo(({ navigation }) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [FetchedEvents, setFetchedEvents] = useState<Array<Event> | undefined>(
     []
   );
@@ -29,17 +30,29 @@ const EventsListScreen: React.FC<Props> = React.memo(({ navigation }) => {
   }, []);
 
   const fetchEvents = async () => {
-    const { data: items, ok }: ApiResponse<Event[]> = await service.getAll();
-    if (!ok) return;
+    setLoading(true);
+    setTimeout(async () => {
+      const { data: items, ok }: ApiResponse<Event[]> = await service.getAll();
+      if (!ok) return;
 
-    events = items?.slice(0);
-    setFetchedEvents(items);
-    setFetched(true);
+      events = items?.slice(0);
+      setFetchedEvents(items);
+      setFetched(true);
+      setLoading(false);
+    }, 3000);
   };
   return (
     <View style={styles.container}>
       <AppSearchItem />
-      <AppEventList items={FetchedEvents} onRefresh={fetchEvents} />
+      {loading ? (
+        <ActivityIndicator
+          animating={true}
+          style={styles.indicator}
+          size="large"
+        />
+      ) : (
+        <AppEventList items={FetchedEvents} onRefresh={fetchEvents} />
+      )}
     </View>
   );
 });
@@ -48,6 +61,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Color.white,
+  },
+  indicator: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    height: 80,
   },
 });
 

@@ -12,7 +12,7 @@ const AppMapView: React.FC<Props> = ({
   return (
     <View style={styles.container}>
       <MapView
-        scrollEnabled={false}
+        // scrollEnabled={false}
         style={styles.map}
         initialRegion={{
           latitude: coordination["latitude"],

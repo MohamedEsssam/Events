@@ -10,6 +10,10 @@ var server = app.listen(9000, function () {
     console.log("app listening on port 9000!");
 });
 var socketIo = new socket_io_1.SocketIo();
+app.use(express_1.default.static("./dist/public", {
+    index: false,
+    extensions: ["png", "jpg", "jpeg", "mp4", "avi", "3gp"],
+}));
 require("./startup/config")();
 require("./startup/cors")(app);
 require("./startup/swagger")(app);
