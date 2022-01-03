@@ -1,9 +1,9 @@
 import { ApiResponse } from "apisauce";
-import User from "../entities/User";
 import { Repository } from "./repository/Repository";
 import Client from "./client";
+import Participant from "../entities/Participant";
 
-export class ParticipantServices extends Repository<User> {
+export class ParticipantServices extends Repository<Participant> {
   constructor() {
     super("participant");
   }

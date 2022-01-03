@@ -27,7 +27,6 @@ const EventForm: React.FC<Props> = (props) => {
   const { user } = useAuth();
   const onSubmit = async (values: Event) => {
     values.owner = user._id;
-    console.log(user._id, user);
 
     const {
       data: event,

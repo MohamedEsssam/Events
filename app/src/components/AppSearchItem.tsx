@@ -22,7 +22,7 @@ const AppSearchItem: React.FC<Props> = (props) => {
             Find Event
           </AppText>
           <Image
-            source={require("../../assets/resp3.jpeg")}
+            source={require("../../assets/profilepic.jpg")}
             style={styles.image}
             resizeMode="cover"
           />

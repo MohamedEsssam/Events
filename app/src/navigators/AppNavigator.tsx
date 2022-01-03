@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import FeedNavigator from "./FeedNavigator";
 import EventFormScreen from "../screens/EventFormScreen";
 import AppAddEventButton from "../components/AppAddEventButton";
-import EventDetailsScreen from "../screens/EventDetailsScreen";
+import ParticipantAccountScreen from "../screens/ParticipantAccountScreen";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 const AppNavigator = () => {
@@ -33,7 +33,7 @@ const AppNavigator = () => {
       />
       <Screen
         name="Account"
-        component={EventDetailsScreen}
+        component={ParticipantAccountScreen}
         options={{
           tabBarIcon: ({ size, color }) => (
             <MaterialCommunityIcons name="account" size={size} color={color} />
