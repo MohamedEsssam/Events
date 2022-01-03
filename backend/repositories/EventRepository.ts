@@ -1,6 +1,6 @@
 import { Repository } from "./repository/Repository";
 import Event from "../entities/Event";
-import { EnforceDocument } from "mongoose";
+import { EnforceDocument, FilterQuery } from "mongoose";
 import { validateEventSchema } from "../schemas/EventSchema";
 import BadRequest from "../exceptions/BadRequest";
 import { OrganizationRepository } from "./OrganizationRepository";
@@ -10,6 +10,18 @@ export class EventRepository extends Repository<Event> {
   private organizationRepository = new OrganizationRepository(
     OrganizationModel
   );
+  /**OverLoading method getAll */
+  public async getAll(searchQuery: any): Promise<Event[] | null> {
+    searchQuery["title"] = {
+      $regex: new RegExp("^" + searchQuery["title"] + ".*$"),
+    };
+
+    const events = await this.model
+      .find(searchQuery ? searchQuery : {})
+      .sort({ holdOn: "desc" });
+
+    return events;
+  }
   /**Override method create */
   public async create(event: Event): Promise<Event | null> {
     const { error } = validateEventSchema(event);

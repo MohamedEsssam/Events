@@ -24,7 +24,7 @@ export abstract class Repository<T> implements IWrite<T>, IRead<T> {
 
     return existItem;
   }
-  public async getAll(item?: FilterQuery<T>): Promise<T[]> {
+  public async getAll(item?: FilterQuery<T>): Promise<T[] | null> {
     const items = await this.model
       .find(item ? item : {})
       .sort({ holdOn: "desc" });

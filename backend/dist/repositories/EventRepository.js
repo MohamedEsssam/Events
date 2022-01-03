@@ -67,6 +67,26 @@ var EventRepository = /** @class */ (function (_super) {
         _this.organizationRepository = new OrganizationRepository_1.OrganizationRepository(organization_1.default);
         return _this;
     }
+    /**OverLoading method getAll */
+    EventRepository.prototype.getAll = function (searchQuery) {
+        return __awaiter(this, void 0, void 0, function () {
+            var events;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        searchQuery["title"] = {
+                            $regex: new RegExp("^" + searchQuery["title"] + ".*$"),
+                        };
+                        return [4 /*yield*/, this.model
+                                .find(searchQuery ? searchQuery : {})
+                                .sort({ holdOn: "desc" })];
+                    case 1:
+                        events = _a.sent();
+                        return [2 /*return*/, events];
+                }
+            });
+        });
+    };
     /**Override method create */
     EventRepository.prototype.create = function (event) {
         return __awaiter(this, void 0, void 0, function () {
