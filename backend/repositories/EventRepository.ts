@@ -12,12 +12,14 @@ export class EventRepository extends Repository<Event> {
   );
   /**OverLoading method getAll */
   public async getAll(searchQuery: any): Promise<Event[] | null> {
-    searchQuery["title"] = {
-      $regex: new RegExp("^" + searchQuery["title"] + ".*$"),
-    };
+    searchQuery["title"] = searchQuery["title"]
+      ? {
+          $regex: new RegExp("^" + searchQuery["title"] + ".*$"),
+        }
+      : null;
 
     const events = await this.model
-      .find(searchQuery ? searchQuery : {})
+      .find(searchQuery["title"] ? searchQuery : {})
       .sort({ holdOn: "desc" });
 
     return events;

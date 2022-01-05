@@ -14,7 +14,7 @@ export abstract class Repository<T> implements IWrite<T>, IRead<T> {
   delete(id: string): Promise<ApiResponse<T | null>> {
     throw new Error("Method not implemented.");
   }
-  async getAll(): Promise<ApiResponse<T[]>> {
+  async getAll(searchQuery: any): Promise<ApiResponse<T[]>> {
     return Client.get(this.path);
   }
   getOne(id: string): Promise<ApiResponse<T | null>> {

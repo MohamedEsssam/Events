@@ -32,7 +32,9 @@ const EventsListScreen: React.FC<Props> = React.memo(({ navigation }) => {
   const fetchEvents = async () => {
     setLoading(true);
     setTimeout(async () => {
-      const { data: items, ok }: ApiResponse<Event[]> = await service.getAll();
+      const { data: items, ok }: ApiResponse<Event[]> = await service.getAll(
+        ""
+      );
       if (!ok) return;
 
       events = items?.slice(0);
@@ -43,7 +45,7 @@ const EventsListScreen: React.FC<Props> = React.memo(({ navigation }) => {
   };
   return (
     <View style={styles.container}>
-      <AppSearchItem />
+      <AppSearchItem setEvents={setFetchedEvents} />
       {loading ? (
         <ActivityIndicator
           animating={true}

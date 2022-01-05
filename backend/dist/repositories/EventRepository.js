@@ -74,11 +74,13 @@ var EventRepository = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        searchQuery["title"] = {
-                            $regex: new RegExp("^" + searchQuery["title"] + ".*$"),
-                        };
+                        searchQuery["title"] = searchQuery["title"]
+                            ? {
+                                $regex: new RegExp("^" + searchQuery["title"] + ".*$"),
+                            }
+                            : null;
                         return [4 /*yield*/, this.model
-                                .find(searchQuery ? searchQuery : {})
+                                .find(searchQuery["title"] ? searchQuery : {})
                                 .sort({ holdOn: "desc" })];
                     case 1:
                         events = _a.sent();

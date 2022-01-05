@@ -1,15 +1,28 @@
 import React from "react";
 import { View, StyleSheet, Image } from "react-native";
+import { ApiResponse } from "apisauce";
+import { EventServices } from "../services/EventServices";
+import Event from "../entities/Event";
 
 import AppText from "./AppText";
 import AppTextInput from "./AppTextInput";
 import AppRadioButton from "./AppRadioButton";
-
 import { Color } from "../config/Color";
 
-export interface Props {}
+export interface Props {
+  setEvents: (events: Event[] | undefined) => void;
+}
 
-const AppSearchItem: React.FC<Props> = (props) => {
+const service = new EventServices();
+
+const AppSearchItem: React.FC<Props> = ({ setEvents }) => {
+  const onChangeText = async (keyword: string) => {
+    const { data: events }: ApiResponse<Event[]> = await service.getAll({
+      title: keyword,
+    });
+
+    setEvents(events);
+  };
   return (
     <View style={styles.container}>
       <View style={{ paddingTop: 35 }}>
@@ -28,8 +41,10 @@ const AppSearchItem: React.FC<Props> = (props) => {
           />
         </View>
         <AppTextInput
-          placeholder="Search Event"
+          placeholder="Search For Events"
           iconType="search"
+          //@ts-ignore
+          onChangeText={(text: string) => onChangeText(text)}
           style={{
             backgroundColor: "#ffffff",
             opacity: 0.5,
